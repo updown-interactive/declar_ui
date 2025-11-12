@@ -1,0 +1,45 @@
+name: declar_ui
+version: 1.0.0
+description: >
+  Declar UI is a declarative and composable Flutter UI framework by UpDown Interactive. 
+  It offers a fluent, SwiftUI-inspired syntax for building clean, modern Flutter interfaces 
+  using expressive, chainable modifiers. Declar UI reimagines core widgets into lightweight, 
+  immutable components that enhance readability, reduce boilerplate, and scale elegantly.
+
+
+homepage: https://github.com/updown-interactive/declar_ui
+repository: https://github.com/updown-interactive/declar_ui
+issue_tracker: https://github.com/updown-interactive/declar_ui/issues
+documentation: https://github.com/updown-interactive/declar_ui#readme
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+topics:
+  - declarative
+  - ui
+  - framework
+  - flutter
+  - design-system
+
+platforms:
+  android:
+  ios:
+  web:
+  macos:
+  windows:
+  linux:
