@@ -1,3 +1,9 @@
+## 0.0.2
+
+### Material App update
+- `MaterialApp` now supports `routerConfig` for declarative routing.
+- Added `themeMode` and `darkTheme` properties to `MaterialApp` for better theme management.
+---
 ## 0.0.1
 
 ### Initial Stable Release — Declar UI
