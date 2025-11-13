@@ -1,3 +1,9 @@
+## 0.0.3
+
+### Widget Declar Retracted
+
+---
+
 ## 0.0.2
 
 ### Material App update

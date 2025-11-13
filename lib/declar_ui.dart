@@ -14,7 +14,6 @@ export 'package:declar_ui/src/widgets/stack.dart';
 export 'package:declar_ui/src/widgets/material_app.dart';
 export 'package:declar_ui/src/widgets/when.dart';
 export 'package:declar_ui/src/widgets/scaffold.dart';
-export 'package:declar_ui/src/widgets/declar.dart';
 export 'package:declar_ui/src/utils/screen.dart';
 export 'package:declar_ui/src/utils/constants.dart';
 
