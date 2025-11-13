@@ -214,6 +214,19 @@ extension ScreenDimensionExtension on BuildContext {
 
   /// XXL screens (very large desktops)
   bool get isXxl => maxWidth >= 1400;
+
+  /// Returns the current theme data.
+  ThemeData get theme => Theme.of(this);
+
+  /// Returns the current color scheme from the theme.
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
+  /// Returns the current text theme from the theme.
+  TextTheme get textTheme => Theme.of(this).textTheme;
+
+  /// Returns the current typography from the theme.
+  Typography get typography => Theme.of(this).typography;
+
 }
 
 

@@ -1,3 +1,15 @@
+## 0.0.4
+
+### Updates
+### New Features
+- **`Screen` Utility (`screen.dart`):** Introduced a comprehensive utility for responsive UI development, providing easy access to device dimensions, orientation, platform, safe area insets, keyboard visibility, and accessibility settings via `BuildContext` extensions.
+- **`Constants` Utility (`constants.dart`):** Added a set of predefined, scalable design constants for consistent spacing (`DSize`) and corner radii (`DRadius`), promoting visual harmony across UI components.
+
+### Improvements
+- **README Update:** The `README.md` has been significantly updated to include detailed documentation and examples for the new `Screen` and `Constants` utilities, along with general enhancements for clarity and professionalism.
+- **Code Structure:** Organized new utilities into dedicated files (`screen.dart`, `constants.dart`) within the `lib/widgets` directory for better modularity.
+
+---
 ## 0.0.3
 
 ### Widget Declar Retracted
