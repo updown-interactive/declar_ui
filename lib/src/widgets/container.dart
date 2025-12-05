@@ -292,6 +292,7 @@ extension ContainerExtension on Container {
     );
 
     final newDecoration = (_decoration is BoxDecoration)
+        // ignore: unnecessary_cast
         ? (_decoration as BoxDecoration).copyWith(borderRadius: radius)
         : BoxDecoration(color: _color, borderRadius: radius);
     return _copyWith(decoration: newDecoration);
