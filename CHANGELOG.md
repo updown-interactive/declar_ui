@@ -1,3 +1,5 @@
+## **0.0.6**
+  * **Minor hotfix to Group Widget**
 
 ## **0.0.5**
 

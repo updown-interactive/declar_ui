@@ -12,6 +12,7 @@ export 'package:declar_ui/src/widgets/text.dart';
 export 'package:declar_ui/src/widgets/icon.dart';
 export 'package:declar_ui/src/widgets/stack.dart';
 export 'package:declar_ui/src/widgets/material_app.dart';
+export 'package:declar_ui/src/widgets/group.dart';
 export 'package:declar_ui/src/widgets/when.dart';
 export 'package:declar_ui/src/widgets/scaffold.dart';
 export 'package:declar_ui/src/utils/screen.dart';
