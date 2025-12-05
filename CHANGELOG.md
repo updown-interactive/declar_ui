@@ -1,3 +1,34 @@
+
+## **0.0.5**
+
+###  New Features
+
+* **`Group` Widget (`group.dart`)**
+  Introduced a powerful layout utility widget that enables grouping multiple widgets under a unified configuration.
+  Supports:
+
+  * **Vertical, horizontal, and stacked layouts**
+  * **Shared modifiers** across all children (padding, decoration, frame sizing, alignment, spacing)
+  * **Container-like wrapping** with decoration, background, overlay, tap gestures, and animation support
+  * **Per-layout alignment**
+
+    * `makeVertical(main:, cross:)`
+    * `makeHorizontal(main:, cross:)`
+    * `makeStack(alignment:)`
+  * **Unified fluent-style modifier API**
+
+    * `.padding()`, `.backgroundColor()`, `.cornerRadius()`, `.frame()`,
+      `.spacing()`, `.overlayView()`, `.backgroundView()`,
+      `.onTapGesture()`, `.animation()`, and more.
+
+This widget significantly enhances Declar UI’s composability by allowing complex layouts to be expressed in a compact and expressive manner.
+
+###  Improvements
+
+* Internal utility cleanup and alignment updates for consistency with other Declar UI widgets.
+* Documentation comments added to `group.dart` for clear API usage.
+
+
 ## 0.0.4
 
 ### Updates
