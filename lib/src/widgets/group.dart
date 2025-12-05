@@ -6,7 +6,6 @@
 
 import 'package:declar_ui/declar_ui.dart';
 
-
 ///
 /// Defines layout types for the [Group] widget.
 ///
@@ -154,7 +153,7 @@ class Group extends StatelessWidget {
     );
 
     if (background != null) {
-      result = Stack( [background!, result]);
+      result = Stack([background!, result]);
     }
 
     if (overlay != null) {
@@ -197,7 +196,6 @@ class Group extends StatelessWidget {
   }
 }
 
-
 ///
 /// Modifier extensions for [Group].
 ///
@@ -205,7 +203,6 @@ class Group extends StatelessWidget {
 /// decoration, animation, and gesture behaviors.
 ///
 extension GroupModifiers on Group {
-
   /// Configures the group to use a vertical layout.
   /// Allows customizing main and cross axis alignment.
   Group makeVertical({
@@ -261,7 +258,6 @@ extension GroupModifiers on Group {
     return _copyWith(decoration: deco);
   }
 
-
   /// Applies a uniform border radius to all children.
   Group radius(double value) {
     final deco = (decoration ?? BoxDecoration())
@@ -290,8 +286,7 @@ extension GroupModifiers on Group {
   Group overlayView(Widget view) => _copyWith(overlay: view);
 
   /// Adds a pointer tap handler for all wrapped children.
-  Group onTapGesture(VoidCallback handler) =>
-      _copyWith(onTap: handler);
+  Group onTapGesture(VoidCallback handler) => _copyWith(onTap: handler);
 
   /// Enables implicit animations for modified values.
   Group animation({

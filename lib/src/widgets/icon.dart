@@ -86,7 +86,7 @@ class Icon extends material.StatelessWidget {
     // Apply alignment if specified
     if (_alignment != null) {
       return material.Align(
-        alignment: _alignment,
+        alignment: _alignment!,
         child: iconWidget,
       );
     }
