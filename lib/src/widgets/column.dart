@@ -6,19 +6,26 @@
 
 import 'package:flutter/material.dart' as material;
 
-/// A declarative wrapper around Flutter’s [Column] widget that supports
-/// composable syntax—similar to SwiftUI.
+/// A declarative wrapper around Flutter’s [material.Column] widget.
 ///
-/// It allows you to express layout logic in a more **readable, SwiftUI-like** way.
+/// This widget enables a **SwiftUI-like, composable API** for building
+/// vertical layouts by allowing configuration through immutable,
+/// chainable modifiers.
 ///
-/// Example:
+/// Instead of mutating properties, layout changes are expressed by
+/// returning new instances of [Column].
+///
+/// ### Example
 /// ```dart
 /// Column([
 ///   Text('Hello'),
 ///   Text('World'),
 /// ])
-///   .align(main: MainAxisAlignment.center, cross: CrossAxisAlignment.start)
 ///   .spacing(12)
+///   .align(
+///     main: MainAxisAlignment.center,
+///     cross: CrossAxisAlignment.start,
+///   )
 ///   .expandedAll();
 /// ```
 class Column extends material.StatelessWidget {
@@ -31,21 +38,35 @@ class Column extends material.StatelessWidget {
   final material.TextBaseline? _textBaseline;
   final double _spacing;
 
-  /// Creates a customizable [Column] widget.
+  /// Creates a declarative [Column] widget.
   ///
-  /// Parameters:
-  /// - [mainAxisAlignment]: Defines how children are aligned vertically.
-  /// - [crossAxisAlignment]: Defines horizontal alignment.
-  /// - [mainAxisSize]: Controls whether the column takes minimum or maximum height.
-  /// - [spacing]: Adds consistent spacing between children (requires Flutter 3.24+).
+  /// All parameters mirror those of Flutter’s [material.Column], with the
+  /// addition of [spacing], which inserts consistent vertical space between
+  /// children (available in Flutter 3.24 and later).
   ///
-  /// Example:
+  /// If not specified, default values match Flutter’s standard [Column]
+  /// behavior.
+  ///
+  /// ### Example
   /// ```dart
-  /// Column([
-  ///   Text('Item 1'),
-  ///   Text('Item 2'),
-  /// ], spacing: 8);
+  /// Column(
+  ///   [
+  ///     Text('Item 1'),
+  ///     Text('Item 2'),
+  ///   ],
+  ///   spacing: 8,
+  /// );
   /// ```
+  /// or
+  /// ```dart
+  /// Column(
+  ///   [
+  ///     Text('Item 1'),
+  ///     Text('Item 2'),
+  ///   ],
+  /// ).spacing(8);
+  /// ```
+  ///
   const Column(
     this._children, {
     super.key,
@@ -67,7 +88,10 @@ class Column extends material.StatelessWidget {
         _textBaseline = textBaseline,
         _spacing = spacing;
 
-  /// Internal immutable copy helper.
+  /// Creates an immutable copy of this [Column] with updated values.
+  ///
+  /// This method is used internally by extension modifiers to support
+  /// a declarative, chainable configuration style without mutating state.
   Column _copyWith({
     List<material.Widget>? children,
     material.MainAxisAlignment? mainAxisAlignment,
@@ -105,24 +129,29 @@ class Column extends material.StatelessWidget {
       children: _children,
     );
   }
+
+
+
 }
 
-// MARK: - Extension
+// MARK: - Column Modifiers
 
-/// Provides expressive and chainable layout modifiers for [Column].
+/// Extension methods that provide expressive, chainable layout modifiers
+/// for the declarative [Column] widget.
 ///
-/// These extension methods mirror Flutter layout APIs like alignment,
-/// spacing, and sizing — but in a declarative, composable way.
+/// Each modifier returns a **new [Column] instance**, enabling an
+/// immutable, SwiftUI-style configuration pattern.
 ///
-/// Example:
+/// ### Example
 /// ```dart
 /// Column([Text('A'), Text('B')])
 ///   .spacing(8)
-///   .align(main: MainAxisAlignment.center)
+///   .mainAlign(MainAxisAlignment.center)
 ///   .expandedAll();
 /// ```
 extension ColumnExtension on Column {
-  /// Updates both [MainAxisAlignment] and [CrossAxisAlignment] values.
+  /// Updates both the [material.MainAxisAlignment] and
+  /// [material.CrossAxisAlignment] of the column.
   Column align({
     material.MainAxisAlignment? main,
     material.CrossAxisAlignment? cross,
@@ -131,38 +160,47 @@ extension ColumnExtension on Column {
 
   /// Sets the vertical spacing between children.
   ///
-  /// Works in Flutter 3.24 and later using the `spacing` parameter.
+  /// Uses Flutter’s native `spacing` parameter (Flutter 3.24+).
   Column spacing(double? spacing) => _copyWith(spacing: spacing ?? 0.0);
 
-  /// Sets the [MainAxisSize] for the column.
+  /// Sets the [material.MainAxisSize] of the column.
   Column size(material.MainAxisSize? size) =>
       _copyWith(mainAxisSize: size ?? material.MainAxisSize.max);
 
-  /// Updates only the [CrossAxisAlignment] value.
+  /// Updates only the [material.CrossAxisAlignment].
   Column crossAlign(material.CrossAxisAlignment? cross) =>
       _copyWith(crossAxisAlignment: cross);
 
-  /// Updates only the [MainAxisAlignment] value.
+  /// Updates only the [material.MainAxisAlignment].
   Column mainAlign(material.MainAxisAlignment? main) =>
       _copyWith(mainAxisAlignment: main);
 
-  /// Reverses the order of children in the column.
+  /// Reverses the order of the column’s children.
   Column reversed() => _copyWith(children: _children.reversed.toList());
 
-  /// Wraps every child in an [Expanded] widget.
+  /// Wraps every child in an [material.Expanded] widget.
+  ///
+  /// Useful when all children should equally share available vertical space.
   Column expandedAll() => _copyWith(
-        children: _children.map((child) => material.Expanded(child: child)).toList(),
+        children:
+            _children.map((child) => material.Expanded(child: child)).toList(),
       );
 
-  /// Wraps every child in a [Flexible] widget with configurable [flex] and [fit].
-  Column flexibleAll({int flex = 1, material.FlexFit fit = material.FlexFit.loose}) =>
+  /// Wraps every child in a [material.Flexible] widget.
+  ///
+  /// Allows customization of the [flex] factor and [material.FlexFit].
+  Column flexibleAll({
+    int flex = 1,
+    material.FlexFit fit = material.FlexFit.loose,
+  }) =>
       _copyWith(
         children: _children
-            .map((child) => material.Flexible(flex: flex, fit: fit, child: child))
+            .map(
+              (child) => material.Flexible(flex: flex, fit: fit, child: child),
+            )
             .toList(),
       );
 
   /// Keeps only the first [count] children of the column.
-  Column take(int count) =>
-      _copyWith(children: _children.take(count).toList());
+  Column take(int count) => _copyWith(children: _children.take(count).toList());
 }

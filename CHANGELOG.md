@@ -1,3 +1,131 @@
+## **1.0.8 — Major Stable Release**
+
+> This release marks a **major milestone** for Declar UI.
+> The framework has been **validated in real-world production apps** and introduces a refined, stable, and extensible foundation for declarative Flutter UI development.
+
+---
+
+### Highlights
+
+* **Production-tested API surface**
+* **Stabilized fluent modifier system**
+* **Expanded sliver & scroll architecture**
+* **Advanced spacing & layout primitives**
+* **Design-system-ready color and spacing utilities**
+
+This release contains **breaking changes** and is not backward-compatible with `1.x`.
+
+---
+
+##  New Features
+
+### **Declarative `CustomScrollView`**
+
+* SwiftUI-style immutable wrapper around Flutter’s `CustomScrollView`
+* Full parity with native API
+* Fluent modifiers:
+
+  * Scroll direction, physics, controller, shrinkWrap
+  * Keyboard dismiss behavior
+  * Padding & SafeArea support
+* Designed for expressive **sliver-first layouts**
+
+---
+
+### **Unified `Sliver` API**
+
+* Declarative wrapper supporting:
+
+  * `SliverList`, `SliverGrid`
+  * `SliverFixedExtentList`, `SliverPrototypeExtentList`
+  * `SliverFillRemaining`, `SliverFillViewport`
+  * `SliverToBoxAdapter`
+* Chainable modifiers for:
+
+  * Padding & layout control
+  * Grid configuration
+  * Performance tuning
+  * Child transformation
+* Seamless integration with `CustomScrollView`
+
+---
+
+### **Advanced Spacing System**
+
+* Introduced **render-object–based spacing primitives**
+* New `Spacing` enum with semantic values
+* Widgets:
+
+  * `Space`
+  * `MaxSpace`
+  * `SliverSpace`
+  * `SliverFlexibleSpace`
+* Automatically adapts to:
+
+  * Flex direction (Row / Column)
+  * Scroll direction (vertical / horizontal)
+* Optimized for performance and composability
+
+---
+
+### **Powerful `Group` Layout Container**
+
+* Unified abstraction over:
+
+  * Column
+  * Row
+  * Stack
+  * Wrap
+* Container-level modifiers:
+
+  * Padding, decoration, spacing
+  * Overlays & backgrounds
+  * Gestures & animations
+* Enables compact expression of complex layouts
+
+---
+
+### **Color Extension System**
+
+* Comprehensive UI-focused `Color` extensions:
+
+  * Brightness & saturation control
+  * Opacity helpers
+  * Color harmony utilities
+  * WCAG contrast checks
+  * Material color generation
+* Includes factory helpers:
+
+  * Hex, RGB, HSL, HSV creation
+
+---
+
+## Improvements
+
+* Internal rendering architecture refined for performance and consistency
+* API naming aligned across widgets and extensions
+* Extensive documentation added across public APIs
+* Reduced boilerplate and improved developer ergonomics
+
+---
+
+##  Breaking Changes
+
+* Public API reorganization to support long-term stability
+* Introduction of sliver-first primitives may require layout migration
+* Some legacy utilities and experimental APIs removed or renamed
+
+---
+
+## Stability & Production Readiness
+
+* APIs validated in **real-world Flutter applications**
+* Designed for **scalability, performance, and maintainability**
+* Safe for use in production environments
+
+---
+
+
 ## **0.0.6**
   * **Minor hotfix to Group Widget**
 
