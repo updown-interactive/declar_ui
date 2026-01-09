@@ -12,7 +12,8 @@ export 'package:flutter/material.dart'
         Stack,
         MaterialApp,
         Scaffold,
-        CustomScrollView;
+        CustomScrollView,
+        TextField;
 
 export 'package:declar_ui/src/widgets/row.dart';
 export 'package:declar_ui/src/widgets/column.dart';
@@ -30,7 +31,9 @@ export 'package:declar_ui/src/utils/screen.dart';
 export 'package:declar_ui/src/utils/constants.dart';
 export 'package:declar_ui/src/widgets/custom_scroll_view.dart';
 export 'package:declar_ui/src/widgets/sliver.dart';
+export 'package:declar_ui/src/widgets/text_field.dart';
 
 // Export extensions  port
 export 'package:declar_ui/src/extensions/widget+extension.dart';
 export 'package:declar_ui/src/extensions/string+extension.dart';
+export 'package:declar_ui/src/extensions/color+extension.dart';
