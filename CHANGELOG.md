@@ -1,3 +1,290 @@
+## **1.0.9 — Container Enhancement Release**
+
+> This release introduces a **comprehensive extension system** for the `Container` widget, bringing it to feature parity with modern declarative UI frameworks and expanding Declar UI's modifier capabilities.
+
+---
+
+### Highlights
+
+* **Dramatically expanded Container modifier API**
+* **Advanced decoration and styling primitives**
+* **Gradient and image background support**
+* **Transform and animation utilities**
+* **Enhanced gesture and interaction modifiers**
+
+---
+
+## New Features
+
+### **Advanced Decoration System**
+
+* **`.decoration(BoxDecoration)`** — Apply custom BoxDecoration with full control
+* **`.foregroundDecoration(BoxDecoration)`** — Overlay decorations on top of content
+* **`.shape(BoxShape)`** — Set container shape (rectangle/circle)
+* **`.circle()`** — Quick circular shape shorthand
+* **`.square(double)`** — Equal width and height for perfect squares
+
+**Example:**
+```dart
+Container(Icon(Icons.star))
+  .circle()
+  .size(width: 60, height: 60)
+  .backgroundColor(Colors.blue);
+```
+
+---
+
+### **Shadow & Visual Effects**
+
+* **`.shadow()`** — Single shadow with customizable blur, offset, spread, and color
+* **`.shadows(List<BoxShadow>)`** — Multiple layered shadows for depth effects
+
+**Example:**
+```dart
+Container(Text('Elevated Card'))
+  .contentPadding(all: 16)
+  .radius(all: 12)
+  .shadow(
+    color: Colors.black26,
+    blurRadius: 8,
+    offset: Offset(0, 4),
+  );
+```
+
+---
+
+### **Gradient Backgrounds**
+
+Complete gradient support with three gradient types:
+
+* **`.linearGradient()`** — Linear gradients with customizable direction
+* **`.radialGradient()`** — Radial gradients from center point
+* **`.sweepGradient()`** — Sweep/conical gradients for circular effects
+
+**Example:**
+```dart
+Container(Text('Gradient Background'))
+  .linearGradient(
+    colors: [Colors.purple, Colors.blue],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  )
+  .radius(all: 16);
+```
+
+---
+
+### **Image Backgrounds**
+
+* **`.backgroundImage()`** — Set background images with fit, alignment, and color filters
+
+**Example:**
+```dart
+Container(Text('Overlay Text'))
+  .backgroundImage(
+    image: NetworkImage('https://example.com/bg.jpg'),
+    fit: BoxFit.cover,
+    colorFilter: ColorFilter.mode(
+      Colors.black45,
+      BlendMode.darken,
+    ),
+  )
+  .size(width: 300, height: 200);
+```
+
+---
+
+### **Enhanced Border System**
+
+* **`.borderSides()`** — Individual border configuration per side (top, bottom, left, right)
+
+**Example:**
+```dart
+Container(Text('Custom Borders'))
+  .borderSides(
+    top: BorderSide(color: Colors.red, width: 3),
+    bottom: BorderSide(color: Colors.blue, width: 3),
+  )
+  .contentPadding(all: 12);
+```
+
+---
+
+### **Transform & Animation Utilities**
+
+Powerful transformation modifiers for dynamic UI:
+
+* **`.rotate(double)`** — Rotate by angle in radians
+* **`.scale(double)`** — Scale uniformly
+* **`.translate()`** — Translate (move) in x, y, z directions
+* **`.transform(Matrix4)`** — Apply custom transformation matrix
+* **`.transformAlignment(AlignmentGeometry)`** — Set transform pivot point
+
+**Example:**
+```dart
+Container(Icon(Icons.arrow_forward))
+  .rotate(0.785) // 45 degrees
+  .transformAlignment(Alignment.center)
+  .contentPadding(all: 8);
+```
+
+---
+
+### **Clipping & Opacity**
+
+* **`.clip(Clip)`** — Control clipping behavior (hardEdge, antiAlias, etc.)
+* **`.opacity(double)`** — Wrap in Opacity widget for fade effects
+
+**Example:**
+```dart
+Container(Image.network('...'))
+  .radius(all: 16)
+  .clip(Clip.hardEdge)
+  .opacity(0.8);
+```
+
+---
+
+### **Layout & Interaction Utilities**
+
+* **`.expand({int flex})`** — Wrap in Expanded widget for flexible layouts
+* **`.aspectRatio(double)`** — Maintain aspect ratio constraint
+* **`.onTap(VoidCallback)`** — Quick GestureDetector wrapper
+* **`.inkWell()`** — Material ripple effects with tap/long-press support
+
+**Example:**
+```dart
+Container(Text('Tap Me'))
+  .contentPadding(all: 16)
+  .backgroundColor(Colors.blue)
+  .radius(all: 8)
+  .inkWell(
+    onTap: () => print('Tapped!'),
+    splashColor: Colors.white24,
+  );
+```
+
+---
+
+## Improvements
+
+* **Complete modifier parity** with Flutter's Container widget
+* **Chainable API** maintains immutability and composability
+* **Comprehensive documentation** with inline examples
+* **Type-safe** parameter validation throughout
+* **Performance optimized** for production use
+
+---
+
+## API Consistency
+
+All new modifiers follow Declar UI's established patterns:
+
+* Immutable widget modification
+* Fluent chaining syntax
+* SwiftUI-inspired naming conventions
+* Null-safe parameter handling
+* Proper BoxDecoration merging for complex compositions
+
+---
+
+## Usage Examples
+
+### Card with Multiple Effects
+```dart
+Container(
+  Column([
+    Text('Premium Feature').fontSize(18).bold(),
+    Space(height: 8),
+    Text('Unlock advanced capabilities'),
+  ]),
+)
+  .contentPadding(all: 20)
+  .linearGradient(
+    colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  )
+  .radius(all: 16)
+  .shadows([
+    BoxShadow(
+      color: Colors.black12,
+      blurRadius: 10,
+      offset: Offset(0, 4),
+    ),
+    BoxShadow(
+      color: Color(0xFF667eea).withOpacity(0.3),
+      blurRadius: 20,
+      offset: Offset(0, 8),
+    ),
+  ])
+  .inkWell(onTap: () => print('Upgrade!'));
+```
+
+### Circular Avatar with Border
+```dart
+Container(Image.network('https://example.com/avatar.jpg'))
+  .circle()
+  .square(80)
+  .border(color: Colors.white, width: 3)
+  .shadow(
+    color: Colors.black26,
+    blurRadius: 8,
+    offset: Offset(0, 2),
+  )
+  .clip(Clip.antiAlias);
+```
+
+### Animated Transform Card
+```dart
+Container(Icon(Icons.favorite, size: 32))
+  .contentPadding(all: 16)
+  .backgroundColor(Colors.red)
+  .circle()
+  .scale(isLiked ? 1.2 : 1.0)
+  .transformAlignment(Alignment.center)
+  .onTap(() => setState(() => isLiked = !isLiked));
+```
+
+---
+
+##  Migration Notes
+
+All new features are **additive** — no breaking changes to existing Container API. Existing code continues to work without modification.
+
+New modifiers seamlessly integrate with existing ones:
+```dart
+// Old style still works
+Container(Text('Hello'))
+  .backgroundColor(Colors.blue)
+  .radius(all: 8);
+
+// Can now be enhanced with new features
+Container(Text('Hello'))
+  .linearGradient(colors: [Colors.blue, Colors.purple])
+  .radius(all: 8)
+  .shadow(blurRadius: 4);
+```
+
+---
+
+## Complete Feature Set
+
+The Container widget now supports **50+ chainable modifiers** covering:
+
+✅ Size & constraints (width, height, size, square, constrain)  
+✅ Padding & margin (contentPadding, contentMargin)  
+✅ Colors & gradients (backgroundColor, linearGradient, radialGradient, sweepGradient)  
+✅ Borders & shapes (border, borderSides, radius, circle, shape)  
+✅ Shadows & effects (shadow, shadows)  
+✅ Images & overlays (backgroundImage, foregroundDecoration)  
+✅ Transforms (rotate, scale, translate, transform, transformAlignment)  
+✅ Clipping & opacity (clip, opacity)  
+✅ Alignment (center, topLeft, bottomRight, etc.)  
+✅ Layout utilities (expand, aspectRatio)  
+✅ Gestures (onTap, inkWell)  
+
+
 ## **1.0.8 — Major Stable Release**
 
 > This release marks a **major milestone** for Declar UI.

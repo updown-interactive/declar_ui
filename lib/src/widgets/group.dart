@@ -90,6 +90,38 @@ class Group extends StatelessWidget {
   final ScrollPhysics? scrollPhysics;
   final ScrollController? scrollController;
 
+  /// A high-level layout container that unifies Column, Row, Stack, and Wrap
+  /// with a chainable modifier API.
+  ///
+  /// [Group] supports four layout modes:
+  /// - Vertical layout (Column-like)
+  /// - Horizontal layout (Row-like)
+  /// - Stacked layout (Stack-like, overlapping children)
+  /// - Wrap layout (Wrap-like, flowing arrangement)
+  ///
+  /// Features:
+  /// - Padding (applied to the container, not individual children)
+  /// - Decoration (color, border, radius, shadows, gradients)
+  /// - Container-level alignment
+  /// - Spacing between items (uses native Column/Row spacing)
+  /// - Overlays and background widgets
+  /// - Tap gesture handling
+  /// - Implicit animations
+  /// - Scroll support for overflowing content
+  ///
+  /// Example:
+  /// ```dart
+  /// Group([
+  ///   Text("Item 1"),
+  ///   Text("Item 2"),
+  ///   Text("Item 3"),
+  /// ])
+  ///   .makeVertical(main: MainAxisAlignment.center)
+  ///   .padding(all: 16)
+  ///   .backgroundColor(Colors.blue)
+  ///   .cornerRadius(12)
+  ///   .spacing(8);
+  /// ```
   const Group(
     this.children, {
     super.key,

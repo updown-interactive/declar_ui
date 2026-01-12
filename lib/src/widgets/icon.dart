@@ -28,11 +28,18 @@ class Icon extends material.StatelessWidget {
   final List<material.Shadow>? _shadows;
   final material.AlignmentGeometry? _alignment;
 
-  /// Creates a declarative [Icon] widget.
+  /// A declarative wrapper around Flutter’s [Icon] widget that supports
+  /// **fluent-style extensions** for easy customization.
+  ///
+  /// Enables expressive, chainable syntax for icon styling — similar
+  /// to SwiftUI or Jetpack Compose.
   ///
   /// Example:
   /// ```dart
-  /// Icon(material.Icons.star, color: material.Colors.amber, size: 24);
+  /// Icon(Icons.favorite)
+  ///   .color(material.Colors.red)
+  ///   .size(32)
+  ///   .semantic('Favorite icon');
   /// ```
   const Icon(
     this._icon, {
