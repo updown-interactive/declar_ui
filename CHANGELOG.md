@@ -1,3 +1,11 @@
+## **2.0.3**
+
+* Added `ListView.builder` directly to the `ListView` declarative wrapper for dynamic item streaming.
+* Added `Sliver.listBuilder` factory to easily proxy infinite `SliverList.builder` patterns.
+* Fixed property assignment bugs and linter warnings across `CustomScrollView`, `Wrap`, `Card`, `Positioned`, and `SafeArea`.
+
+---
+
 ## **2.0.2**
 
 * Resolved `BuildContext` property conflicts between `context+extension.dart` and `screen.dart`.
