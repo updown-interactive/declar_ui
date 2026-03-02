@@ -1,11 +1,12 @@
-## **1.2.0 — Comprehensive UI Toolkit & Production Utilities**
+## **2.0.0 — Comprehensive UI Toolkit & Production Utilities**
 
-> This massive update significantly expands the widget library with new declarative components and introduces a suite of production-grade extension utilities that drastically reduce boilerplate across BuildContext, Iterables, and more.
+> This massive major update significantly expands the widget library with new declarative components, introduces a suite of production-grade extension utilities, and fundamentally refines the core layout widgets for better type-safety and syntax alignment.
 
 ---
 
 ### Highlights
 
+* **[BREAKING]** `Column`, `Row`, and `Stack` syntax overhauled for stability.
 * **New Declarative Widgets:** `Wrap`, `SafeArea`, `Positioned`, `Image`, `Card`, and `ListView`
 * **Powerful BuildContext Extensions** for Theme, Sizing, Navigation, and SnackBar shortcuts
 * **Iterable Utilities** including `mapIndexed`, `firstWhereOrNull`, `groupBy`, and array `.separated` widgets
@@ -58,7 +59,7 @@ Handle mapping and list construction easily via our new `Iterable` injections:
 
 ```dart
 // Auto-inject spacing between widgets
-Row([Text('A'), Text('B')].separated(Space(width: 8)))
+Row.children([Text('A'), Text('B')].separated(Space(width: 8)))
 
 // Map items with their indexes
 myList.mapIndexed((index, item) => Text('$index: $item'))
@@ -91,9 +92,44 @@ await 2.seconds.delay(); // Native dart int extensions
 
 ---
 
+## ⚠️ Breaking Changes (Migration Guide)
+
+In an effort to standardize layout semantics alongside native Flutter alignment properties, the syntax for **`Row`**, **`Column`**, and **`Stack`** has been updated to require named constructors or explicit parameters.
+
+**Previous Syntax (1.x):**
+```dart
+Column([
+  Text('Item 1'),
+  Text('Item 2'),
+])
+
+Row([
+  Icon(Icons.star),
+  Text('Rating'),
+])
+```
+
+**New Syntax (2.0):**
+```dart
+// Option A: Using explicit named constructor (Recommended)
+Column.children([
+  Text('Item 1'),
+  Text('Item 2'),
+])
+
+// Option B: Using explicit parameter
+Row(children: [
+  Icon(Icons.star),
+  Text('Rating'),
+])
+```
+*Note: This change corrects several underlying parsing and positional parameter issues, allowing us to align exactly with Dart's modern linting requirements natively.*
+
+---
+
 ## Migration Notes
 
-This update sits beautifully on top of `1.0.9`. Ensure that you resolve any possible conflicting properties if migrating an extremely legacy version, but otherwise, this is an entirely non-breaking, completely additive update.
+Please review the **Breaking Changes** outlined above to update your core layout widgets. Other than the syntax shift on `Row`, `Column`, and `Stack`, all newly added utilities and extensions are entirely non-breaking and additive!
 
 ---
 
