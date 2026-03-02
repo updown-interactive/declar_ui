@@ -9,6 +9,7 @@ import 'package:flutter/material.dart' as material;
 /// Defines the type of sliver layout to use.
 enum SliverType {
   list,
+  listBuilder,
   grid,
   fixedExtentList,
   prototypedExtentList,
@@ -24,7 +25,8 @@ enum SliverType {
 /// immutable, chainable modifiers.
 ///
 /// Supports multiple sliver types:
-/// - [SliverType.list] → SliverList
+/// - [SliverType.list] → SliverList (Explicit child list)
+/// - [SliverType.listBuilder] → SliverList.builder (Dynamic child list)
 /// - [SliverType.grid] → SliverGrid
 /// - [SliverType.fixedExtentList] → SliverFixedExtentList
 /// - [SliverType.prototypedExtentList] → SliverPrototypeExtentList
@@ -71,6 +73,10 @@ class Sliver extends material.StatelessWidget {
   // Padding
   final material.EdgeInsetsGeometry? _padding;
 
+  // Builder properties (for list/grid builder)
+  final material.NullableIndexedWidgetBuilder? _itemBuilder;
+  final int? _itemCount;
+
   // Single child (for toBoxAdapter)
   final material.Widget? _child;
 
@@ -95,6 +101,8 @@ class Sliver extends material.StatelessWidget {
     double? viewportFraction,
     material.EdgeInsetsGeometry? padding,
     material.Widget? child,
+    material.NullableIndexedWidgetBuilder? itemBuilder,
+    int? itemCount,
   }) : _children = children,
        _type = type,
        _addAutomaticKeepAlives = addAutomaticKeepAlives,
@@ -112,7 +120,9 @@ class Sliver extends material.StatelessWidget {
        _fillOverscroll = fillOverscroll,
        _viewportFraction = viewportFraction,
        _padding = padding,
-       _child = child;
+       _child = child,
+       _itemBuilder = itemBuilder,
+       _itemCount = itemCount;
 
   // MARK: - Factory Constructors
 
@@ -139,6 +149,34 @@ class Sliver extends material.StatelessWidget {
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
       children: children,
+    );
+  }
+
+  /// Creates a dynamically built [SliverList] that streams item creation.
+  ///
+  /// ### Example
+  /// ```dart
+  /// Sliver.listBuilder(
+  ///   itemBuilder: (context, index) => Text('Item $index'),
+  ///   itemCount: 100,
+  /// );
+  /// ```
+  factory Sliver.listBuilder({
+    material.Key? key,
+    required material.NullableIndexedWidgetBuilder itemBuilder,
+    int? itemCount,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+  }) {
+    return Sliver._(
+      key: key,
+      type: SliverType.listBuilder,
+      addAutomaticKeepAlives: addAutomaticKeepAlives,
+      addRepaintBoundaries: addRepaintBoundaries,
+      addSemanticIndexes: addSemanticIndexes,
+      itemBuilder: itemBuilder,
+      itemCount: itemCount,
     );
   }
 
@@ -333,6 +371,8 @@ class Sliver extends material.StatelessWidget {
     double? viewportFraction,
     material.EdgeInsetsGeometry? padding,
     material.Widget? child,
+    material.NullableIndexedWidgetBuilder? itemBuilder,
+    int? itemCount,
     bool clearPadding = false,
   }) {
     return Sliver._(
@@ -355,6 +395,8 @@ class Sliver extends material.StatelessWidget {
       padding: clearPadding ? null : (padding ?? _padding),
       child: child ?? _child,
       children: children ?? _children,
+      itemBuilder: itemBuilder ?? _itemBuilder,
+      itemCount: itemCount ?? _itemCount,
     );
   }
 
@@ -365,6 +407,18 @@ class Sliver extends material.StatelessWidget {
         return material.SliverList(
           delegate: material.SliverChildListDelegate(
             _children,
+            addAutomaticKeepAlives: _addAutomaticKeepAlives,
+            addRepaintBoundaries: _addRepaintBoundaries,
+            addSemanticIndexes: _addSemanticIndexes,
+          ),
+        );
+
+      case SliverType.listBuilder:
+        return material.SliverList(
+          delegate: material.SliverChildBuilderDelegate(
+            _itemBuilder ??
+                (context, index) => const material.SizedBox.shrink(),
+            childCount: _itemCount,
             addAutomaticKeepAlives: _addAutomaticKeepAlives,
             addRepaintBoundaries: _addRepaintBoundaries,
             addSemanticIndexes: _addSemanticIndexes,

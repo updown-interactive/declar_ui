@@ -24,12 +24,12 @@ class Positioned extends material.StatelessWidget {
     double? bottom,
     double? width,
     double? height,
-  })  : _left = left,
-        _top = top,
-        _right = right,
-        _bottom = bottom,
-        _width = width,
-        _height = height;
+  }) : _left = left,
+       _top = top,
+       _right = right,
+       _bottom = bottom,
+       _width = width,
+       _height = height;
 
   Positioned _copyWith({
     material.Widget? child,
@@ -65,7 +65,6 @@ class Positioned extends material.StatelessWidget {
       left: _left,
       top: _top,
       right: _right,
-      bottom: _bottom,
       width: _width,
       height: _height,
       child: child,
@@ -90,24 +89,17 @@ extension PositionedExtension on Positioned {
   Positioned height(double? value) =>
       _copyWith(height: value, clearHeight: value == null && _height != null);
 
-  Positioned edges(
-          {double? left, double? top, double? right, double? bottom}) =>
-      _copyWith(
-        left: left,
-        top: top,
-        right: right,
-        bottom: bottom,
-      );
+  Positioned edges({
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+  }) => _copyWith(left: left, top: top, right: right, bottom: bottom);
 
-  Positioned fill(
-          {double? left = 0.0,
-          double? top = 0.0,
-          double? right = 0.0,
-          double? bottom = 0.0}) =>
-      _copyWith(
-        left: left,
-        top: top,
-        right: right,
-        bottom: bottom,
-      );
+  Positioned fill({
+    double? left = 0.0,
+    double? top = 0.0,
+    double? right = 0.0,
+    double? bottom = 0.0,
+  }) => _copyWith(left: left, top: top, right: right, bottom: bottom);
 }

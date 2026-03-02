@@ -32,16 +32,16 @@ class Wrap extends material.StatelessWidget {
     material.VerticalDirection verticalDirection =
         material.VerticalDirection.down,
     material.Clip clipBehavior = material.Clip.none,
-  })  : _children = children,
-        _direction = direction,
-        _alignment = alignment,
-        _spacing = spacing,
-        _runAlignment = runAlignment,
-        _runSpacing = runSpacing,
-        _crossAxisAlignment = crossAxisAlignment,
-        _textDirection = textDirection,
-        _verticalDirection = verticalDirection,
-        _clipBehavior = clipBehavior;
+  }) : _children = children,
+       _direction = direction,
+       _alignment = alignment,
+       _spacing = spacing,
+       _runAlignment = runAlignment,
+       _runSpacing = runSpacing,
+       _crossAxisAlignment = crossAxisAlignment,
+       _textDirection = textDirection,
+       _verticalDirection = verticalDirection,
+       _clipBehavior = clipBehavior;
 
   const Wrap.children(
     List<material.Widget> children, {
@@ -57,16 +57,16 @@ class Wrap extends material.StatelessWidget {
     material.VerticalDirection verticalDirection =
         material.VerticalDirection.down,
     material.Clip clipBehavior = material.Clip.none,
-  })  : _children = children,
-        _direction = direction,
-        _alignment = alignment,
-        _spacing = spacing,
-        _runAlignment = runAlignment,
-        _runSpacing = runSpacing,
-        _crossAxisAlignment = crossAxisAlignment,
-        _textDirection = textDirection,
-        _verticalDirection = verticalDirection,
-        _clipBehavior = clipBehavior;
+  }) : _children = children,
+       _direction = direction,
+       _alignment = alignment,
+       _spacing = spacing,
+       _runAlignment = runAlignment,
+       _runSpacing = runSpacing,
+       _crossAxisAlignment = crossAxisAlignment,
+       _textDirection = textDirection,
+       _verticalDirection = verticalDirection,
+       _clipBehavior = clipBehavior;
 
   Wrap _copyWith({
     List<material.Widget>? children,
@@ -82,7 +82,6 @@ class Wrap extends material.StatelessWidget {
   }) {
     return Wrap(
       key: key,
-      children: children ?? _children,
       direction: direction ?? _direction,
       alignment: alignment ?? _alignment,
       spacing: spacing ?? _spacing,
@@ -92,6 +91,7 @@ class Wrap extends material.StatelessWidget {
       textDirection: textDirection ?? _textDirection,
       verticalDirection: verticalDirection ?? _verticalDirection,
       clipBehavior: clipBehavior ?? _clipBehavior,
+      children: children ?? _children,
     );
   }
 

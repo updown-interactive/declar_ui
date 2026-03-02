@@ -26,13 +26,13 @@ class Card extends material.StatelessWidget {
     material.ShapeBorder? shape,
     material.EdgeInsetsGeometry? margin,
     material.Clip? clipBehavior,
-  })  : _color = color,
-        _shadowColor = shadowColor,
-        _surfaceTintColor = surfaceTintColor,
-        _elevation = elevation,
-        _shape = shape,
-        _margin = margin,
-        _clipBehavior = clipBehavior;
+  }) : _color = color,
+       _shadowColor = shadowColor,
+       _surfaceTintColor = surfaceTintColor,
+       _elevation = elevation,
+       _shape = shape,
+       _margin = margin,
+       _clipBehavior = clipBehavior;
 
   Card _copyWith({
     material.Widget? child,
@@ -46,7 +46,6 @@ class Card extends material.StatelessWidget {
   }) {
     return Card(
       key: key,
-      child: child ?? this.child,
       color: color ?? _color,
       shadowColor: shadowColor ?? _shadowColor,
       surfaceTintColor: surfaceTintColor ?? _surfaceTintColor,
@@ -54,6 +53,7 @@ class Card extends material.StatelessWidget {
       shape: shape ?? _shape,
       margin: margin ?? _margin,
       clipBehavior: clipBehavior ?? _clipBehavior,
+      child: child ?? this.child,
     );
   }
 
@@ -85,16 +85,21 @@ extension CardExtension on Card {
 
   Card shape(material.ShapeBorder shape) => _copyWith(shape: shape);
   Card rounded({double radius = 12.0}) => _copyWith(
-      shape: material.RoundedRectangleBorder(
-          borderRadius: material.BorderRadius.circular(radius)));
+    shape: material.RoundedRectangleBorder(
+      borderRadius: material.BorderRadius.circular(radius),
+    ),
+  );
 
   Card margin(material.EdgeInsetsGeometry margin) => _copyWith(margin: margin);
   Card marginAll(double margin) =>
       _copyWith(margin: material.EdgeInsets.all(margin));
   Card marginSymmetric({double horizontal = 0.0, double vertical = 0.0}) =>
       _copyWith(
-          margin: material.EdgeInsets.symmetric(
-              horizontal: horizontal, vertical: vertical));
+        margin: material.EdgeInsets.symmetric(
+          horizontal: horizontal,
+          vertical: vertical,
+        ),
+      );
 
   Card clip(material.Clip clipBehavior) =>
       _copyWith(clipBehavior: clipBehavior);

@@ -24,12 +24,12 @@ class SafeArea extends material.StatelessWidget {
     bool bottom = true,
     material.EdgeInsets minimum = material.EdgeInsets.zero,
     bool maintainBottomViewPadding = false,
-  })  : _left = left,
-        _top = top,
-        _right = right,
-        _bottom = bottom,
-        _minimum = minimum,
-        _maintainBottomViewPadding = maintainBottomViewPadding;
+  }) : _left = left,
+       _top = top,
+       _right = right,
+       _bottom = bottom,
+       _minimum = minimum,
+       _maintainBottomViewPadding = maintainBottomViewPadding;
 
   SafeArea _copyWith({
     material.Widget? child,
@@ -60,7 +60,6 @@ class SafeArea extends material.StatelessWidget {
       left: _left,
       top: _top,
       right: _right,
-      bottom: _bottom,
       minimum: _minimum,
       maintainBottomViewPadding: _maintainBottomViewPadding,
       child: child,

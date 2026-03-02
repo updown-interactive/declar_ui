@@ -71,9 +71,9 @@ class CustomScrollView extends material.StatelessWidget {
   ///   .vertical()
   ///   .bouncingPhysics();
   /// ```
-  const CustomScrollView(
-    this._slivers, {
+  const CustomScrollView({
     super.key,
+    List<material.Widget> slivers = const [],
     material.Axis scrollDirection = material.Axis.vertical,
     bool reverse = false,
     material.ScrollController? controller,
@@ -91,21 +91,62 @@ class CustomScrollView extends material.StatelessWidget {
         material.ScrollViewKeyboardDismissBehavior.manual,
     String? restorationId,
     material.Clip clipBehavior = material.Clip.hardEdge,
-  })  : _scrollDirection = scrollDirection,
-        _reverse = reverse,
-        _controller = controller,
-        _primary = primary,
-        _physics = physics,
-        _scrollBehavior = scrollBehavior,
-        _shrinkWrap = shrinkWrap,
-        _center = center,
-        _anchor = anchor,
-        _cacheExtent = cacheExtent,
-        _semanticChildCount = semanticChildCount,
-        _dragStartBehavior = dragStartBehavior,
-        _keyboardDismissBehavior = keyboardDismissBehavior,
-        _restorationId = restorationId,
-        _clipBehavior = clipBehavior;
+  }) : _slivers = slivers,
+       _scrollDirection = scrollDirection,
+       _reverse = reverse,
+       _controller = controller,
+       _primary = primary,
+       _physics = physics,
+       _scrollBehavior = scrollBehavior,
+       _shrinkWrap = shrinkWrap,
+       _center = center,
+       _anchor = anchor,
+       _cacheExtent = cacheExtent,
+       _semanticChildCount = semanticChildCount,
+       _dragStartBehavior = dragStartBehavior,
+       _keyboardDismissBehavior = keyboardDismissBehavior,
+       _restorationId = restorationId,
+       _clipBehavior = clipBehavior;
+
+  const CustomScrollView.slivers(
+    List<material.Widget> slivers, {
+    material.Key? key,
+    material.Axis scrollDirection = material.Axis.vertical,
+    bool reverse = false,
+    material.ScrollController? controller,
+    bool? primary,
+    material.ScrollPhysics? physics,
+    material.ScrollBehavior? scrollBehavior,
+    bool shrinkWrap = false,
+    material.Key? center,
+    double anchor = 0.0,
+    double? cacheExtent,
+    int? semanticChildCount,
+    gestures.DragStartBehavior dragStartBehavior =
+        gestures.DragStartBehavior.start,
+    material.ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        material.ScrollViewKeyboardDismissBehavior.manual,
+    String? restorationId,
+    material.Clip clipBehavior = material.Clip.hardEdge,
+  }) : this(
+         key: key,
+         slivers: slivers,
+         scrollDirection: scrollDirection,
+         reverse: reverse,
+         controller: controller,
+         primary: primary,
+         physics: physics,
+         scrollBehavior: scrollBehavior,
+         shrinkWrap: shrinkWrap,
+         center: center,
+         anchor: anchor,
+         cacheExtent: cacheExtent,
+         semanticChildCount: semanticChildCount,
+         dragStartBehavior: dragStartBehavior,
+         keyboardDismissBehavior: keyboardDismissBehavior,
+         restorationId: restorationId,
+         clipBehavior: clipBehavior,
+       );
 
   /// Creates an immutable copy of this [CustomScrollView] with updated values.
   ///
@@ -133,15 +174,16 @@ class CustomScrollView extends material.StatelessWidget {
     bool clearScrollBehavior = false,
   }) {
     return CustomScrollView(
-      slivers ?? _slivers,
       key: key,
+      slivers: slivers ?? _slivers,
       scrollDirection: scrollDirection ?? _scrollDirection,
       reverse: reverse ?? _reverse,
       controller: clearController ? null : (controller ?? _controller),
       primary: primary ?? _primary,
       physics: clearPhysics ? null : (physics ?? _physics),
-      scrollBehavior:
-          clearScrollBehavior ? null : (scrollBehavior ?? _scrollBehavior),
+      scrollBehavior: clearScrollBehavior
+          ? null
+          : (scrollBehavior ?? _scrollBehavior),
       shrinkWrap: shrinkWrap ?? _shrinkWrap,
       center: center ?? _center,
       anchor: anchor ?? _anchor,
@@ -313,20 +355,17 @@ extension CustomScrollViewExtension on CustomScrollView {
   /// Sets how the keyboard should dismiss when scrolling.
   CustomScrollView keyboardDismissBehavior(
     material.ScrollViewKeyboardDismissBehavior behavior,
-  ) =>
-      _copyWith(keyboardDismissBehavior: behavior);
+  ) => _copyWith(keyboardDismissBehavior: behavior);
 
   /// Keyboard dismisses when dragging.
   CustomScrollView keyboardDismissOnDrag() => _copyWith(
-        keyboardDismissBehavior:
-            material.ScrollViewKeyboardDismissBehavior.onDrag,
-      );
+    keyboardDismissBehavior: material.ScrollViewKeyboardDismissBehavior.onDrag,
+  );
 
   /// Keyboard requires manual dismissal (default).
   CustomScrollView keyboardDismissManual() => _copyWith(
-        keyboardDismissBehavior:
-            material.ScrollViewKeyboardDismissBehavior.manual,
-      );
+    keyboardDismissBehavior: material.ScrollViewKeyboardDismissBehavior.manual,
+  );
 
   // ==================== Restoration ====================
 
@@ -414,10 +453,9 @@ extension CustomScrollViewExtension on CustomScrollView {
     );
 
     final paddedSlivers = _slivers
-        .map((sliver) => material.SliverPadding(
-              padding: resolved,
-              sliver: sliver,
-            ))
+        .map(
+          (sliver) => material.SliverPadding(padding: resolved, sliver: sliver),
+        )
         .toList();
 
     return _copyWith(slivers: paddedSlivers);
