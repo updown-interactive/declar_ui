@@ -16,7 +16,6 @@ export 'package:flutter/material.dart'
         TextField,
         Wrap,
         SafeArea,
-        Positioned,
         Image,
         Card,
         ListView;
@@ -40,7 +39,6 @@ export 'package:declar_ui/src/widgets/sliver.dart';
 export 'package:declar_ui/src/widgets/text_field.dart';
 export 'package:declar_ui/src/widgets/wrap.dart';
 export 'package:declar_ui/src/widgets/safe_area.dart';
-export 'package:declar_ui/src/widgets/positioned.dart';
 export 'package:declar_ui/src/widgets/image.dart';
 export 'package:declar_ui/src/widgets/card.dart';
 export 'package:declar_ui/src/widgets/list_view.dart';
