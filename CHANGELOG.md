@@ -1,3 +1,9 @@
+## **2.0.1**
+
+* Upgraded SDK constraints for `flutter` to `>=3.41.0` and `dart` to `>=3.11.0` to ensure compatibility with the latest Flutter stable release.
+
+---
+
 ## **2.0.0 — Comprehensive UI Toolkit & Production Utilities**
 
 > This massive major update significantly expands the widget library with new declarative components, introduces a suite of production-grade extension utilities, and fundamentally refines the core layout widgets for better type-safety and syntax alignment.
