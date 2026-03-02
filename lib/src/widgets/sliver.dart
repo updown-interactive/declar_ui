@@ -95,24 +95,24 @@ class Sliver extends material.StatelessWidget {
     double? viewportFraction,
     material.EdgeInsetsGeometry? padding,
     material.Widget? child,
-  })  : _children = children,
-        _type = type,
-        _addAutomaticKeepAlives = addAutomaticKeepAlives,
-        _addRepaintBoundaries = addRepaintBoundaries,
-        _addSemanticIndexes = addSemanticIndexes,
-        _gridDelegate = gridDelegate,
-        _crossAxisCount = crossAxisCount,
-        _mainAxisSpacing = mainAxisSpacing,
-        _crossAxisSpacing = crossAxisSpacing,
-        _childAspectRatio = childAspectRatio,
-        _mainAxisExtent = mainAxisExtent,
-        _itemExtent = itemExtent,
-        _prototypeItem = prototypeItem,
-        _hasScrollBody = hasScrollBody,
-        _fillOverscroll = fillOverscroll,
-        _viewportFraction = viewportFraction,
-        _padding = padding,
-        _child = child;
+  }) : _children = children,
+       _type = type,
+       _addAutomaticKeepAlives = addAutomaticKeepAlives,
+       _addRepaintBoundaries = addRepaintBoundaries,
+       _addSemanticIndexes = addSemanticIndexes,
+       _gridDelegate = gridDelegate,
+       _crossAxisCount = crossAxisCount,
+       _mainAxisSpacing = mainAxisSpacing,
+       _crossAxisSpacing = crossAxisSpacing,
+       _childAspectRatio = childAspectRatio,
+       _mainAxisExtent = mainAxisExtent,
+       _itemExtent = itemExtent,
+       _prototypeItem = prototypeItem,
+       _hasScrollBody = hasScrollBody,
+       _fillOverscroll = fillOverscroll,
+       _viewportFraction = viewportFraction,
+       _padding = padding,
+       _child = child;
 
   // MARK: - Factory Constructors
 
@@ -372,7 +372,8 @@ class Sliver extends material.StatelessWidget {
         );
 
       case SliverType.grid:
-        final delegate = _gridDelegate ??
+        final delegate =
+            _gridDelegate ??
             material.SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: _crossAxisCount ?? 2,
               mainAxisSpacing: _mainAxisSpacing ?? 0,
@@ -442,10 +443,7 @@ class Sliver extends material.StatelessWidget {
 
     // Apply padding if specified
     if (_padding != null) {
-      sliver = material.SliverPadding(
-        padding: _padding!,
-        sliver: sliver,
-      );
+      sliver = material.SliverPadding(padding: _padding!, sliver: sliver);
     }
 
     return sliver;

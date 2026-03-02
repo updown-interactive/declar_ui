@@ -22,9 +22,6 @@ extension ScreenDimensionExtension on BuildContext {
   /// Returns the aspect ratio of the screen (width/height)
   double get aspectRatio => getScreenAspectRatio(this);
 
-  /// Returns the screen size as a Size object
-  Size get screenSize => getScreenSize(this);
-
   /// Device Properties
   /// Returns the device pixel ratio
   double get pixelRatio => getDevicePixelRatio(this);
@@ -35,9 +32,6 @@ extension ScreenDimensionExtension on BuildContext {
   /// Platform Brightness
   /// Returns the platform brightness
   Brightness get brightness => getPlatformBrightness(this);
-
-  /// Checks if the device is in dark mode
-  bool get isDarkMode => getIsDarkMode(this);
 
   /// Checks if the device is in light mode
   bool get isLightMode => getIsLightMode(this);
@@ -74,9 +68,6 @@ extension ScreenDimensionExtension on BuildContext {
 
   /// Returns the keyboard height
   double get keyboardHeight => getKeyboardHeight(this);
-
-  /// Checks if the keyboard is visible
-  bool get isKeyboardVisible => getIsKeyboardVisible(this);
 
   /// Available Space (excluding system UI)
   /// Returns the available height excluding safe areas
@@ -165,10 +156,10 @@ extension ScreenDimensionExtension on BuildContext {
 
   /// Additional Convenience Properties
   /// Returns the shorter side of the screen
-  double get shortestSide => screenSize.shortestSide;
+  double get shortestSide => getScreenSize(this).shortestSide;
 
   /// Returns the longer side of the screen
-  double get longestSide => screenSize.longestSide;
+  double get longestSide => getScreenSize(this).longestSide;
 
   /// Checks if the screen is wider than it is tall
   bool get isWideScreen => maxWidth > maxHeight;
@@ -180,7 +171,7 @@ extension ScreenDimensionExtension on BuildContext {
   Offset get screenCenter => Offset(maxWidth / 2, maxHeight / 2);
 
   /// Returns the diagonal size of the screen in logical pixels
-  double get screenDiagonal => screenSize.longestSide;
+  double get screenDiagonal => getScreenSize(this).longestSide;
 
   /// Checks if this is likely a phone in portrait mode
   bool get isPhonePortrait => isPortrait && isMobileSize;
@@ -212,18 +203,6 @@ extension ScreenDimensionExtension on BuildContext {
 
   /// XXL screens (very large desktops)
   bool get isXxl => maxWidth >= 1400;
-
-  /// Returns the current theme data.
-  ThemeData get theme => Theme.of(this);
-
-  /// Returns the current color scheme from the theme.
-  ColorScheme get colorScheme => Theme.of(this).colorScheme;
-
-  /// Returns the current text theme from the theme.
-  TextTheme get textTheme => Theme.of(this).textTheme;
-
-  /// Returns the current typography from the theme.
-  Typography get typography => Theme.of(this).typography;
 }
 
 /// Screen Dimension Functions

@@ -99,12 +99,15 @@ void main() {
         final container = tester.widget<material.Container>(
           find.byType(material.Container),
         );
-        expect(container.color, material.Colors.blue);
+        final decoration = container.decoration as material.BoxDecoration;
+        expect(decoration.color, material.Colors.blue);
       });
 
       testWidgets('.contentPadding() sets padding', (tester) async {
         await pumpWidget(
-            tester, const Container(child: null).contentPadding(all: 10));
+          tester,
+          const Container(child: null).contentPadding(all: 10),
+        );
         final container = tester.widget<material.Container>(
           find.byType(material.Container),
         );
@@ -113,7 +116,9 @@ void main() {
 
       testWidgets('.contentMargin() sets margin', (tester) async {
         await pumpWidget(
-            tester, const Container(child: null).contentMargin(all: 10));
+          tester,
+          const Container(child: null).contentMargin(all: 10),
+        );
         final container = tester.widget<material.Container>(
           find.byType(material.Container),
         );
@@ -144,8 +149,9 @@ void main() {
       testWidgets('.border() sets border', (tester) async {
         await pumpWidget(
           tester,
-          const Container(child: null)
-              .border(color: material.Colors.green, width: 2),
+          const Container(
+            child: null,
+          ).border(color: material.Colors.green, width: 2),
         );
         final container = tester.widget<material.Container>(
           find.byType(material.Container),
@@ -235,7 +241,10 @@ void main() {
       });
 
       testWidgets('.expandedAll() wraps children in Expanded', (tester) async {
-        await pumpWidget(tester, const Column.children([Text('A')]).expandedAll());
+        await pumpWidget(
+          tester,
+          const Column.children([Text('A')]).expandedAll(),
+        );
         expect(find.byType(material.Expanded), findsOneWidget);
       });
     });
@@ -243,7 +252,9 @@ void main() {
     group('SizedBox', () {
       testWidgets('renders with specified size', (tester) async {
         await pumpWidget(
-            tester, const SizedBox(child: null, width: 50, height: 100));
+          tester,
+          const SizedBox(child: null, width: 50, height: 100),
+        );
         final box = tester.widget<material.SizedBox>(
           find.byType(material.SizedBox),
         );
@@ -284,8 +295,9 @@ void main() {
       ) async {
         await pumpWidget(
           tester,
-          const SizedBox(child: null)
-              .expanded(expandWidth: true, expandHeight: true),
+          const SizedBox(
+            child: null,
+          ).expanded(expandWidth: true, expandHeight: true),
         );
         final box = tester.widget<material.SizedBox>(
           find.byType(material.SizedBox),
@@ -371,7 +383,10 @@ void main() {
       });
 
       testWidgets('.fit() sets stack fit', (tester) async {
-        await pumpWidget(tester, const Stack.children([]).fit(material.StackFit.expand));
+        await pumpWidget(
+          tester,
+          const Stack.children([]).fit(material.StackFit.expand),
+        );
         final stack = tester.widget<material.Stack>(
           find.byType(material.Stack),
         );
@@ -379,7 +394,10 @@ void main() {
       });
 
       testWidgets('.clip() sets clip behavior', (tester) async {
-        await pumpWidget(tester, const Stack.children([]).clip(material.Clip.none));
+        await pumpWidget(
+          tester,
+          const Stack.children([]).clip(material.Clip.none),
+        );
         final stack = tester.widget<material.Stack>(
           find.byType(material.Stack),
         );
@@ -424,7 +442,7 @@ void main() {
       testWidgets('.expanded() wraps in Expanded', (tester) async {
         await pumpWidget(
           tester,
-          material.Row(children: [const Text('Expanded').expanded(),]),
+          material.Row(children: [const Text('Expanded').expanded()]),
         );
         expect(find.byType(material.Expanded), findsOneWidget);
       });

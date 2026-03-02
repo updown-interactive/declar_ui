@@ -50,12 +50,12 @@ class Icon extends material.StatelessWidget {
     material.TextDirection? textDirection,
     List<material.Shadow>? shadows,
     material.AlignmentGeometry? alignment,
-  })  : _color = color,
-        _size = size,
-        _semanticLabel = semanticLabel,
-        _textDirection = textDirection,
-        _shadows = shadows,
-        _alignment = alignment;
+  }) : _color = color,
+       _size = size,
+       _semanticLabel = semanticLabel,
+       _textDirection = textDirection,
+       _shadows = shadows,
+       _alignment = alignment;
 
   /// Immutable copy helper for fluent chaining.
   Icon _copyWith({
@@ -92,10 +92,7 @@ class Icon extends material.StatelessWidget {
 
     // Apply alignment if specified
     if (_alignment != null) {
-      return material.Align(
-        alignment: _alignment!,
-        child: iconWidget,
-      );
+      return material.Align(alignment: _alignment!, child: iconWidget);
     }
 
     return iconWidget;

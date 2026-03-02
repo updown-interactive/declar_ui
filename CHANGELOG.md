@@ -1,3 +1,10 @@
+## **2.0.2**
+
+* Resolved `BuildContext` property conflicts between `context+extension.dart` and `screen.dart`.
+* Addressed `Container.backgroundColor()` failing test cases by aligning unit tests with the new `BoxDecoration` backend.
+
+---
+
 ## **2.0.1**
 
 * Upgraded SDK constraints for `flutter` to `>=3.41.0` and `dart` to `>=3.11.0` to ensure compatibility with the latest Flutter stable release.
