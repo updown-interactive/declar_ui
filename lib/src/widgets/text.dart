@@ -108,20 +108,22 @@ class Text extends material.StatelessWidget {
 /// ```
 extension TextExtension on Text {
   /// Sets the text color.
-  Text color(material.Color color) =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(color: color));
+  Text color(material.Color color) => _copyWith(
+      style: (_style ?? const material.TextStyle()).copyWith(color: color));
 
   /// Sets the font size.
-  Text size(double size) =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(fontSize: size));
+  Text size(double size) => _copyWith(
+      style: (_style ?? const material.TextStyle()).copyWith(fontSize: size));
 
   /// Sets the font weight.
-  Text weight(material.FontWeight weight) =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(fontWeight: weight));
+  Text weight(material.FontWeight weight) => _copyWith(
+      style:
+          (_style ?? const material.TextStyle()).copyWith(fontWeight: weight));
 
   /// Applies italic styling to the text.
-  Text italic() =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(fontStyle: material.FontStyle.italic));
+  Text italic() => _copyWith(
+      style: (_style ?? const material.TextStyle())
+          .copyWith(fontStyle: material.FontStyle.italic));
 
   /// Applies underline decoration to the text.
   Text underline({material.Color? color, double? thickness}) => _copyWith(
@@ -148,7 +150,8 @@ extension TextExtension on Text {
   Text maxLines(int count) => _copyWith(maxLines: count);
 
   /// Sets how overflowing text is handled.
-  Text overflow(material.TextOverflow overflow) => _copyWith(overflow: overflow);
+  Text overflow(material.TextOverflow overflow) =>
+      _copyWith(overflow: overflow);
 
   /// Sets the text scale factor.
   Text scale(material.TextScaler factor) => _copyWith(textScaleFactor: factor);
@@ -157,17 +160,20 @@ extension TextExtension on Text {
   Text wrap(bool enabled) => _copyWith(softWrap: enabled);
 
   /// Sets letter spacing.
-  Text letterSpacing(double spacing) =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(letterSpacing: spacing));
+  Text letterSpacing(double spacing) => _copyWith(
+      style: (_style ?? const material.TextStyle())
+          .copyWith(letterSpacing: spacing));
 
   /// Sets line height (height multiplier).
-  Text lineHeight(double height) =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(height: height));
+  Text lineHeight(double height) => _copyWith(
+      style: (_style ?? const material.TextStyle()).copyWith(height: height));
 
   /// Sets font family.
-  Text font(String family) =>
-      _copyWith(style: (_style ?? const material.TextStyle()).copyWith(fontFamily: family));
+  Text font(String family) => _copyWith(
+      style:
+          (_style ?? const material.TextStyle()).copyWith(fontFamily: family));
 
   /// Sets a custom text direction.
-  Text direction(material.TextDirection direction) => _copyWith(textDirection: direction);
+  Text direction(material.TextDirection direction) =>
+      _copyWith(textDirection: direction);
 }

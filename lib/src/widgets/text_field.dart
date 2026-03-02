@@ -600,8 +600,7 @@ extension TextFieldExtension on TextField {
   // ==================== Cursor Styling ====================
 
   /// Sets cursor color.
-  TextField cursorColor(material.Color color) =>
-      _copyWith(cursorColor: color);
+  TextField cursorColor(material.Color color) => _copyWith(cursorColor: color);
 
   /// Sets cursor width.
   TextField cursorWidth(double width) => _copyWith(cursorWidth: width);
@@ -667,6 +666,5 @@ extension TextFieldExtension on TextField {
   TextField restorationId(String id) => _copyWith(restorationId: id);
 
   /// Enables or disables scribble (Apple Pencil input).
-  TextField scribble([bool value = true]) =>
-      _copyWith(scribbleEnabled: value);
+  TextField scribble([bool value = true]) => _copyWith(scribbleEnabled: value);
 }

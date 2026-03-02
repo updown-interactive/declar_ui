@@ -706,6 +706,65 @@ extension ContainerExtension on Container {
   /// ```
   Container align(AlignmentGeometry alignment) => _withAlignment(alignment);
 
+  /// Applies a visual style to the [Container] using a [BoxDecoration].
+  ///
+  /// This provides a **SwiftUI-like styling API** while preserving
+  /// immutability. Instead of modifying the existing instance,
+  /// this method returns a new [Container] with the updated decoration.
+  ///
+  /// All parameters map directly to properties of [BoxDecoration].
+  ///
+  /// ### Parameters
+  /// - [color] → Background color of the container.
+  /// - [border] → Border to draw around the container.
+  /// - [borderRadius] → Corner radius (only applies when [shape] is
+  ///   [BoxShape.rectangle]).
+  /// - [boxShadow] → List of shadows behind the container.
+  /// - [gradient] → Background gradient.
+  /// - [backgroundBlendMode] → Blend mode applied to the background.
+  /// - [shape] → Shape of the container (rectangle or circle).
+  /// - [image] → Background image decoration.
+  ///
+  /// ### Example
+  /// ```dart
+  /// Container()
+  ///   .style(
+  ///     color: Colors.white,
+  ///     borderRadius: BorderRadius.circular(12),
+  ///     boxShadow: [
+  ///       BoxShadow(
+  ///         color: Colors.black26,
+  ///         blurRadius: 8,
+  ///       ),
+  ///     ],
+  ///   );
+  /// ```
+  ///
+  /// ⚠️ If both [color] and [gradient] are provided,
+  /// the gradient will visually override the color.
+  Container style({
+    Color? color,
+    Border? border,
+    BorderRadius? borderRadius,
+    List<BoxShadow>? boxShadow,
+    Gradient? gradient,
+    BlendMode? backgroundBlendMode,
+    BoxShape shape = BoxShape.rectangle,
+    DecorationImage? image,
+  }) =>
+      _copyWith(
+        decoration: BoxDecoration(
+          color: color,
+          border: border,
+          borderRadius: borderRadius,
+          boxShadow: boxShadow,
+          gradient: gradient,
+          backgroundBlendMode: backgroundBlendMode,
+          shape: shape,
+          image: image,
+        ),
+      );
+
   /// Private helper for applying alignment to a container.
   Container _withAlignment(AlignmentGeometry alignmentValue) {
     return _copyWith(alignment: alignmentValue);

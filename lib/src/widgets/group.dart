@@ -52,7 +52,7 @@ enum GroupLayoutType {
 ///   .spacing(8);
 /// ```
 class Group extends StatelessWidget {
-  final List<Widget> children;
+  final List<Widget> _children;
   final GroupLayoutType layout;
 
   // Container-level properties
@@ -122,9 +122,9 @@ class Group extends StatelessWidget {
   ///   .cornerRadius(12)
   ///   .spacing(8);
   /// ```
-  const Group(
-    this.children, {
+  const Group({
     super.key,
+    List<Widget> children = const [],
     this.layout = GroupLayoutType.vertical,
     this.padding,
     this.decoration,
@@ -149,10 +149,11 @@ class Group extends StatelessWidget {
     this.scrollable = false,
     this.scrollPhysics,
     this.scrollController,
-  });
+  }) : _children = children;
 
   /// Creates an updated copy with changed properties.
   Group _copyWith({
+    List<Widget>? children,
     GroupLayoutType? layout,
     EdgeInsetsGeometry? padding,
     BoxDecoration? decoration,
@@ -181,7 +182,6 @@ class Group extends StatelessWidget {
     bool clearBackground = false,
   }) {
     return Group(
-      children,
       key: key,
       layout: layout ?? this.layout,
       padding: padding ?? this.padding,
@@ -207,6 +207,7 @@ class Group extends StatelessWidget {
       scrollable: scrollable ?? this.scrollable,
       scrollPhysics: scrollPhysics ?? this.scrollPhysics,
       scrollController: scrollController ?? this.scrollController,
+      children: children ?? _children,
     );
   }
 
@@ -231,7 +232,7 @@ class Group extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       mainAxisSize: mainAxisSize,
       spacing: spacing,
-      children: children,
+      children: _children,
     );
 
     return scrollable
@@ -251,7 +252,7 @@ class Group extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       mainAxisSize: mainAxisSize,
       spacing: spacing,
-      children: children,
+      children: _children,
     );
 
     return scrollable
@@ -268,7 +269,7 @@ class Group extends StatelessWidget {
     return Stack(
       alignment: stackAlignment,
       fit: stackFit,
-      children: children,
+      children: _children,
     );
   }
 
@@ -279,7 +280,7 @@ class Group extends StatelessWidget {
       crossAxisAlignment: wrapCrossAlignment,
       spacing: spacing,
       runSpacing: runSpacing ?? spacing,
-      children: children,
+      children: _children,
     );
   }
 

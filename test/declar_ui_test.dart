@@ -168,7 +168,7 @@ void main() {
 
     group('Row', () {
       testWidgets('renders children in a row', (tester) async {
-        await pumpWidget(tester, const Row([Text('A'), Text('B')]));
+        await pumpWidget(tester, const Row.children([Text('A'), Text('B')]));
         expect(find.byType(material.Row), findsOneWidget);
         expect(find.text('A'), findsOneWidget);
         expect(find.text('B'), findsOneWidget);
@@ -179,7 +179,7 @@ void main() {
       ) async {
         await pumpWidget(
           tester,
-          const Row([]).align(
+          const Row.children([]).align(
             main: MainAxisAlignment.center,
             cross: CrossAxisAlignment.start,
           ),
@@ -190,20 +190,20 @@ void main() {
       });
 
       testWidgets('.spacing() sets spacing between children', (tester) async {
-        await pumpWidget(tester, const Row([]).spacing(10));
+        await pumpWidget(tester, const Row.children([]).spacing(10));
         final row = tester.widget<material.Row>(find.byType(material.Row));
         expect(row.spacing, 10);
       });
 
       testWidgets('.expandedAll() wraps children in Expanded', (tester) async {
-        await pumpWidget(tester, const Row([Text('A')]).expandedAll());
+        await pumpWidget(tester, const Row.children([Text('A')]).expandedAll());
         expect(find.byType(material.Expanded), findsOneWidget);
       });
     });
 
     group('Column', () {
       testWidgets('renders children in a column', (tester) async {
-        await pumpWidget(tester, const Column([Text('A'), Text('B')]));
+        await pumpWidget(tester, const Column.children([Text('A'), Text('B')]));
         expect(find.byType(material.Column), findsOneWidget);
         expect(find.text('A'), findsOneWidget);
         expect(find.text('B'), findsOneWidget);
@@ -214,7 +214,7 @@ void main() {
       ) async {
         await pumpWidget(
           tester,
-          const Column([]).align(
+          const Column.children([]).align(
             main: MainAxisAlignment.center,
             cross: CrossAxisAlignment.start,
           ),
@@ -227,7 +227,7 @@ void main() {
       });
 
       testWidgets('.spacing() sets spacing between children', (tester) async {
-        await pumpWidget(tester, const Column([]).spacing(10));
+        await pumpWidget(tester, const Column.children([]).spacing(10));
         final column = tester.widget<material.Column>(
           find.byType(material.Column),
         );
@@ -235,7 +235,7 @@ void main() {
       });
 
       testWidgets('.expandedAll() wraps children in Expanded', (tester) async {
-        await pumpWidget(tester, const Column([Text('A')]).expandedAll());
+        await pumpWidget(tester, const Column.children([Text('A')]).expandedAll());
         expect(find.byType(material.Expanded), findsOneWidget);
       });
     });
@@ -354,7 +354,7 @@ void main() {
 
     group('Stack', () {
       testWidgets('renders with children', (tester) async {
-        await pumpWidget(tester, const Stack([Text('On top')]));
+        await pumpWidget(tester, const Stack.children([Text('On top')]));
         expect(find.byType(material.Stack), findsOneWidget);
         expect(find.text('On top'), findsOneWidget);
       });
@@ -362,7 +362,7 @@ void main() {
       testWidgets('.alignment() sets stack alignment', (tester) async {
         await pumpWidget(
           tester,
-          const Stack([]).alignment(material.Alignment.center),
+          const Stack.children([]).alignment(material.Alignment.center),
         );
         final stack = tester.widget<material.Stack>(
           find.byType(material.Stack),
@@ -371,7 +371,7 @@ void main() {
       });
 
       testWidgets('.fit() sets stack fit', (tester) async {
-        await pumpWidget(tester, const Stack([]).fit(material.StackFit.expand));
+        await pumpWidget(tester, const Stack.children([]).fit(material.StackFit.expand));
         final stack = tester.widget<material.Stack>(
           find.byType(material.Stack),
         );
@@ -379,7 +379,7 @@ void main() {
       });
 
       testWidgets('.clip() sets clip behavior', (tester) async {
-        await pumpWidget(tester, const Stack([]).clip(material.Clip.none));
+        await pumpWidget(tester, const Stack.children([]).clip(material.Clip.none));
         final stack = tester.widget<material.Stack>(
           find.byType(material.Stack),
         );
@@ -424,7 +424,7 @@ void main() {
       testWidgets('.expanded() wraps in Expanded', (tester) async {
         await pumpWidget(
           tester,
-          material.Row(children: [const Text('Expanded').expanded()]),
+          material.Row(children: [const Text('Expanded').expanded(),]),
         );
         expect(find.byType(material.Expanded), findsOneWidget);
       });

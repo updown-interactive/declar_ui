@@ -143,7 +143,8 @@ extension MaterialAppExtension on MaterialApp {
   MaterialApp theme(material.ThemeData theme) => _copyWith(theme: theme);
 
   /// Sets the dark theme for the app.
-  MaterialApp darkTheme(material.ThemeData theme) => _copyWith(darkTheme: theme);
+  MaterialApp darkTheme(material.ThemeData theme) =>
+      _copyWith(darkTheme: theme);
 
   /// Sets how the app adapts to system or user theme.
   MaterialApp themeMode(material.ThemeMode mode) => _copyWith(themeMode: mode);

@@ -9,8 +9,8 @@ import 'package:flutter/material.dart' as material;
 /// A declarative wrapper around Flutter’s [Scaffold] widget that supports
 /// composable, chainable syntax — inspired by SwiftUI.
 ///
-/// It allows you to express app structure more **readably and fluently**, 
-/// combining body, app bar, floating buttons, drawers, and more 
+/// It allows you to express app structure more **readably and fluently**,
+/// combining body, app bar, floating buttons, drawers, and more
 /// in a single declarative expression.
 ///
 /// Example:
@@ -98,8 +98,7 @@ class Scaffold extends material.StatelessWidget {
       resizeToAvoidBottomInset:
           resizeToAvoidBottomInset ?? _resizeToAvoidBottomInset,
       extendBody: extendBody ?? _extendBody,
-      extendBodyBehindAppBar:
-          extendBodyBehindAppBar ?? _extendBodyBehindAppBar,
+      extendBodyBehindAppBar: extendBodyBehindAppBar ?? _extendBodyBehindAppBar,
     );
   }
 
@@ -171,8 +170,7 @@ extension ScaffoldExtension on Scaffold {
       _copyWith(bottomNavigationBar: bar);
 
   /// Sets a [BottomSheet] widget.
-  Scaffold bottomSheet(material.Widget? sheet) =>
-      _copyWith(bottomSheet: sheet);
+  Scaffold bottomSheet(material.Widget? sheet) => _copyWith(bottomSheet: sheet);
 
   /// Determines whether the Scaffold resizes when the keyboard appears.
   Scaffold resizeToAvoidBottomInset(bool value) =>

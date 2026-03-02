@@ -1,3 +1,102 @@
+## **1.2.0 — Comprehensive UI Toolkit & Production Utilities**
+
+> This massive update significantly expands the widget library with new declarative components and introduces a suite of production-grade extension utilities that drastically reduce boilerplate across BuildContext, Iterables, and more.
+
+---
+
+### Highlights
+
+* **New Declarative Widgets:** `Wrap`, `SafeArea`, `Positioned`, `Image`, `Card`, and `ListView`
+* **Powerful BuildContext Extensions** for Theme, Sizing, Navigation, and SnackBar shortcuts
+* **Iterable Utilities** including `mapIndexed`, `firstWhereOrNull`, `groupBy`, and array `.separated` widgets
+* **Numeric Duration Extensions** for effortless delays and easy-to-read millisecond/second conversions
+* **Advanced Widget Effects** like `blur()` (glassmorphism), `tooltip()`, and `unfocusOnTap()`
+* **Sliver conversion** with `.asSliver()`
+
+---
+
+## New Features
+
+### **New Components**
+
+Six highly requested Flutter widgets have been wrapped with fluid, immutable declarative modifiers:
+
+* **`Wrap`** — `.horizontal()`, `.vertical()`, `.spacing()`, `.runSpacing()`, etc.
+* **`SafeArea`** — `.edges()`, `.all()`, `.bottom()`, `.none()`, etc.
+* **`Positioned`** — Control all stack offsets via `.left()`, `.right()`, `.top()`, `.bottom()`, `.fill()`
+* **`Image`** — Supports `Image.network()` and `Image.asset()` with easy `.fit()`, `.color()` and blending modifiers
+* **`ListView`** — Control via `.horizontal()`, `.paddingAll()`, `.bouncing()`, `.shrinkWrap()`
+* **`Card`** — Quickly configure `.color()`, `.elevation()`, `.rounded()`, `.marginSymmetric()`
+
+### **Production Context Shortcuts**
+
+`BuildContext` is now vastly more powerful, heavily reducing mapping code:
+
+```dart
+// Theming
+context.theme
+context.colors
+context.textTheme
+context.isDarkMode
+
+// Viewport / Screen sizes
+context.sw(0.5) // Gets 50% screen width
+context.height
+context.bottomPadding
+context.isKeyboardVisible
+
+// Quick Routing & Status
+context.push(MyWidget())
+context.pop()
+context.showSnackBar('Saved!')
+context.hideKeyboard()
+```
+
+### **Iterable & Widget Arrays**
+
+Handle mapping and list construction easily via our new `Iterable` injections:
+
+```dart
+// Auto-inject spacing between widgets
+Row([Text('A'), Text('B')].separated(Space(width: 8)))
+
+// Map items with their indexes
+myList.mapIndexed((index, item) => Text('$index: $item'))
+
+// Safe nullable searching
+var target = myList.firstWhereOrNull((item) => item.isValid);
+
+// Grouping
+var sortedDict = objects.groupBy((item) => item.category);
+```
+
+### **Advanced UI Effects**
+
+Added highly sought-after capabilities directly onto `Widget`:
+
+* **`.blur(sigmaX: 10, sigmaY: 10, borderRadius: ...)`** — Instantly applies a BackDropFilter for rapid glassmorphism UI builds.
+* **`.tooltip('Hold to edit')`** — Automatic semantic tooltip wrapping.
+* **`.unfocusOnTap(context)`** — Wrap any layout in this to automatically dismiss the keyboard when the user taps whitespace.
+* **`.asSliver()`** — Morph standard widgets into slivers instantly! (`SliverToBoxAdapter`).
+
+### **Time & Delays**
+
+```dart
+await 2.seconds.delay(); // Native dart int extensions
+
+// Create durations smoothly
+500.milliseconds
+1.minutes
+```
+
+---
+
+## Migration Notes
+
+This update sits beautifully on top of `1.0.9`. Ensure that you resolve any possible conflicting properties if migrating an extremely legacy version, but otherwise, this is an entirely non-breaking, completely additive update.
+
+---
+
 ## **1.0.9 — Container Enhancement Release**
 
 > This release introduces a **comprehensive extension system** for the `Container` widget, bringing it to feature parity with modern declarative UI frameworks and expanding Declar UI's modifier capabilities.

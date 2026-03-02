@@ -75,9 +75,9 @@ class Sliver extends material.StatelessWidget {
   final material.Widget? _child;
 
   /// Creates a declarative [Sliver] widget.
-  const Sliver._(
-    this._children, {
+  const Sliver._({
     super.key,
+    List<material.Widget> children = const [],
     required SliverType type,
     bool addAutomaticKeepAlives = true,
     bool addRepaintBoundaries = true,
@@ -95,7 +95,8 @@ class Sliver extends material.StatelessWidget {
     double? viewportFraction,
     material.EdgeInsetsGeometry? padding,
     material.Widget? child,
-  })  : _type = type,
+  })  : _children = children,
+        _type = type,
         _addAutomaticKeepAlives = addAutomaticKeepAlives,
         _addRepaintBoundaries = addRepaintBoundaries,
         _addSemanticIndexes = addSemanticIndexes,
@@ -132,12 +133,12 @@ class Sliver extends material.StatelessWidget {
     bool addSemanticIndexes = true,
   }) {
     return Sliver._(
-      children,
       key: key,
       type: SliverType.list,
       addAutomaticKeepAlives: addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
+      children: children,
     );
   }
 
@@ -169,7 +170,6 @@ class Sliver extends material.StatelessWidget {
     bool addSemanticIndexes = true,
   }) {
     return Sliver._(
-      children,
       key: key,
       type: SliverType.grid,
       gridDelegate: gridDelegate,
@@ -181,6 +181,7 @@ class Sliver extends material.StatelessWidget {
       addAutomaticKeepAlives: addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
+      children: children,
     );
   }
 
@@ -202,13 +203,13 @@ class Sliver extends material.StatelessWidget {
     bool addSemanticIndexes = true,
   }) {
     return Sliver._(
-      children,
       key: key,
       type: SliverType.fixedExtentList,
       itemExtent: itemExtent,
       addAutomaticKeepAlives: addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
+      children: children,
     );
   }
 
@@ -230,13 +231,13 @@ class Sliver extends material.StatelessWidget {
     bool addSemanticIndexes = true,
   }) {
     return Sliver._(
-      children,
       key: key,
       type: SliverType.prototypedExtentList,
       prototypeItem: prototypeItem,
       addAutomaticKeepAlives: addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
+      children: children,
     );
   }
 
@@ -255,12 +256,12 @@ class Sliver extends material.StatelessWidget {
     bool fillOverscroll = false,
   }) {
     return Sliver._(
-      const [],
       key: key,
       type: SliverType.fillRemaining,
       child: child,
       hasScrollBody: hasScrollBody,
       fillOverscroll: fillOverscroll,
+      children: [],
     );
   }
 
@@ -282,13 +283,13 @@ class Sliver extends material.StatelessWidget {
     bool addSemanticIndexes = true,
   }) {
     return Sliver._(
-      children,
       key: key,
       type: SliverType.fillViewport,
       viewportFraction: viewportFraction,
       addAutomaticKeepAlives: addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
+      children: children,
     );
   }
 
@@ -305,10 +306,10 @@ class Sliver extends material.StatelessWidget {
     required material.Widget child,
   }) {
     return Sliver._(
-      const [],
       key: key,
       type: SliverType.toBoxAdapter,
       child: child,
+      children: [],
     );
   }
 
@@ -335,11 +336,9 @@ class Sliver extends material.StatelessWidget {
     bool clearPadding = false,
   }) {
     return Sliver._(
-      children ?? _children,
       key: key,
       type: type ?? _type,
-      addAutomaticKeepAlives:
-          addAutomaticKeepAlives ?? _addAutomaticKeepAlives,
+      addAutomaticKeepAlives: addAutomaticKeepAlives ?? _addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries ?? _addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes ?? _addSemanticIndexes,
       gridDelegate: gridDelegate ?? _gridDelegate,
@@ -355,6 +354,7 @@ class Sliver extends material.StatelessWidget {
       viewportFraction: viewportFraction ?? _viewportFraction,
       padding: clearPadding ? null : (padding ?? _padding),
       child: child ?? _child,
+      children: children ?? _children,
     );
   }
 
@@ -517,8 +517,7 @@ extension SliverExtension on Sliver {
   Sliver crossAxisCount(int count) => _copyWith(crossAxisCount: count);
 
   /// Sets main axis spacing for grid.
-  Sliver mainAxisSpacing(double spacing) =>
-      _copyWith(mainAxisSpacing: spacing);
+  Sliver mainAxisSpacing(double spacing) => _copyWith(mainAxisSpacing: spacing);
 
   /// Sets cross axis spacing for grid.
   Sliver crossAxisSpacing(double spacing) =>
@@ -540,8 +539,7 @@ extension SliverExtension on Sliver {
   Sliver itemExtent(double extent) => _copyWith(itemExtent: extent);
 
   /// Sets the prototype item for prototype extent lists.
-  Sliver prototypeItem(material.Widget item) =>
-      _copyWith(prototypeItem: item);
+  Sliver prototypeItem(material.Widget item) => _copyWith(prototypeItem: item);
 
   // ==================== Fill Configuration ====================
 

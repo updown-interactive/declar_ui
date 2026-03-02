@@ -286,8 +286,7 @@ extension CustomScrollViewExtension on CustomScrollView {
   // ==================== Cache Extent ====================
 
   /// Sets the cache extent (how far ahead to build slivers).
-  CustomScrollView cacheExtent(double extent) =>
-      _copyWith(cacheExtent: extent);
+  CustomScrollView cacheExtent(double extent) => _copyWith(cacheExtent: extent);
 
   // ==================== Semantic Child Count ====================
 
@@ -332,8 +331,7 @@ extension CustomScrollViewExtension on CustomScrollView {
   // ==================== Restoration ====================
 
   /// Sets the restoration ID for state restoration.
-  CustomScrollView restorationId(String id) =>
-      _copyWith(restorationId: id);
+  CustomScrollView restorationId(String id) => _copyWith(restorationId: id);
 
   // ==================== Clip Behavior ====================
 

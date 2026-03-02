@@ -4,8 +4,6 @@
 //  Created by Siva Sankar on 2025-11-12.
 // ------------------------------------------------------------ //
 
-
-
 import 'dart:io';
 import 'dart:ui';
 
@@ -226,11 +224,7 @@ extension ScreenDimensionExtension on BuildContext {
 
   /// Returns the current typography from the theme.
   Typography get typography => Theme.of(this).typography;
-
 }
-
-
-
 
 /// Screen Dimension Functions
 double getScreenHeight(BuildContext context) {

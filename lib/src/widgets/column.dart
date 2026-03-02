@@ -17,7 +17,7 @@ import 'package:flutter/material.dart' as material;
 ///
 /// ### Example
 /// ```dart
-/// Column([
+/// Column.children([
 ///   Text('Hello'),
 ///   Text('World'),
 /// ])
@@ -67,8 +67,32 @@ class Column extends material.StatelessWidget {
   /// ).spacing(8);
   /// ```
   ///
-  const Column(
-    this._children, {
+  // ✅ Default constructor → Column(children: [])
+  const Column({
+    super.key,
+    List<material.Widget> children = const [],
+    material.MainAxisAlignment mainAxisAlignment =
+        material.MainAxisAlignment.start,
+    material.CrossAxisAlignment crossAxisAlignment =
+        material.CrossAxisAlignment.center,
+    material.MainAxisSize mainAxisSize = material.MainAxisSize.max,
+    material.TextDirection? textDirection,
+    material.VerticalDirection verticalDirection =
+        material.VerticalDirection.down,
+    material.TextBaseline? textBaseline,
+    double spacing = 0.0,
+  })  : _children = children,
+        _mainAxisAlignment = mainAxisAlignment,
+        _crossAxisAlignment = crossAxisAlignment,
+        _mainAxisSize = mainAxisSize,
+        _textDirection = textDirection,
+        _verticalDirection = verticalDirection,
+        _textBaseline = textBaseline,
+        _spacing = spacing;
+
+  // ✅ Named positional constructor → Column.children([])
+  const Column.children(
+    List<material.Widget> children, {
     super.key,
     material.MainAxisAlignment mainAxisAlignment =
         material.MainAxisAlignment.start,
@@ -80,7 +104,8 @@ class Column extends material.StatelessWidget {
         material.VerticalDirection.down,
     material.TextBaseline? textBaseline,
     double spacing = 0.0,
-  })  : _mainAxisAlignment = mainAxisAlignment,
+  })  : _children = children,
+        _mainAxisAlignment = mainAxisAlignment,
         _crossAxisAlignment = crossAxisAlignment,
         _mainAxisSize = mainAxisSize,
         _textDirection = textDirection,
@@ -103,7 +128,6 @@ class Column extends material.StatelessWidget {
     double? spacing,
   }) {
     return Column(
-      children ?? _children,
       key: key,
       mainAxisAlignment: mainAxisAlignment ?? _mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment ?? _crossAxisAlignment,
@@ -112,6 +136,7 @@ class Column extends material.StatelessWidget {
       verticalDirection: verticalDirection ?? _verticalDirection,
       textBaseline: textBaseline ?? _textBaseline,
       spacing: spacing ?? _spacing,
+      children: children ?? _children,
     );
   }
 
@@ -129,9 +154,6 @@ class Column extends material.StatelessWidget {
       children: _children,
     );
   }
-
-
-
 }
 
 // MARK: - Column Modifiers

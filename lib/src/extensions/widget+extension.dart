@@ -4,6 +4,7 @@
 //  Created by Siva Sankar on 2025-11-11.
 // ------------------------------------------------------------ //
 
+import 'dart:ui' as ui;
 import 'package:declar_ui/declar_ui.dart';
 
 extension DeclarativeWidgetExtensions on Widget {
@@ -329,5 +330,50 @@ extension DeclarativeWidgetExtensions on Widget {
       ),
       child: this,
     );
+  }
+
+  // MARK: - Production Level Effects & Utilities
+
+  /// Apply a blur effect (Glassmorphism) over the widget
+  Widget blur(
+      {double sigmaX = 5.0, double sigmaY = 5.0, BorderRadius? borderRadius}) {
+    Widget blurry = BackdropFilter(
+      filter: ui.ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
+      child: this,
+    );
+
+    return borderRadius != null
+        ? ClipRRect(borderRadius: borderRadius, child: blurry)
+        : ClipRect(child: blurry);
+  }
+
+  /// Add a tooltip
+  Widget tooltip(
+    String message, {
+    Duration? waitDuration,
+    Decoration? decoration,
+    TextStyle? textStyle,
+  }) {
+    return Tooltip(
+      message: message,
+      waitDuration: waitDuration,
+      decoration: decoration,
+      textStyle: textStyle,
+      child: this,
+    );
+  }
+
+  /// Unfocus keyboard on tap (useful for tap outside textfield)
+  Widget unfocusOnTap(BuildContext context) {
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      behavior: HitTestBehavior.translucent,
+      child: this,
+    );
+  }
+
+  /// Convert into a Sliver (to be used inside CustomScrollView/Slivers)
+  Widget asSliver() {
+    return SliverToBoxAdapter(child: this);
   }
 }

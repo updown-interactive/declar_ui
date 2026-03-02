@@ -33,8 +33,31 @@ class Row extends material.StatelessWidget {
   final double _spacing;
 
   /// Creates a customizable [Row] widget.
-  const Row(
-    this._children, {
+  const Row({
+    super.key,
+    List<material.Widget> children = const [],
+    material.MainAxisAlignment mainAxisAlignment =
+        material.MainAxisAlignment.start,
+    material.CrossAxisAlignment crossAxisAlignment =
+        material.CrossAxisAlignment.center,
+    material.MainAxisSize mainAxisSize = material.MainAxisSize.max,
+    material.TextDirection? textDirection,
+    material.VerticalDirection verticalDirection =
+        material.VerticalDirection.down,
+    material.TextBaseline? textBaseline,
+    double spacing = 0.0,
+  })  : _children = children,
+        _mainAxisAlignment = mainAxisAlignment,
+        _crossAxisAlignment = crossAxisAlignment,
+        _mainAxisSize = mainAxisSize,
+        _textDirection = textDirection,
+        _verticalDirection = verticalDirection,
+        _textBaseline = textBaseline,
+        _spacing = spacing;
+
+  // ✅ Named positional constructor → Column.children([])
+  const Row.children(
+    List<material.Widget> children, {
     super.key,
     material.MainAxisAlignment mainAxisAlignment =
         material.MainAxisAlignment.start,
@@ -46,7 +69,8 @@ class Row extends material.StatelessWidget {
         material.VerticalDirection.down,
     material.TextBaseline? textBaseline,
     double spacing = 0.0,
-  })  : _mainAxisAlignment = mainAxisAlignment,
+  })  : _children = children,
+        _mainAxisAlignment = mainAxisAlignment,
         _crossAxisAlignment = crossAxisAlignment,
         _mainAxisSize = mainAxisSize,
         _textDirection = textDirection,
@@ -86,7 +110,6 @@ class Row extends material.StatelessWidget {
     double? spacing,
   }) {
     return Row(
-      children ?? _children,
       key: key,
       mainAxisAlignment: mainAxisAlignment ?? _mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment ?? _crossAxisAlignment,
@@ -95,6 +118,7 @@ class Row extends material.StatelessWidget {
       verticalDirection: verticalDirection ?? _verticalDirection,
       textBaseline: textBaseline ?? _textBaseline,
       spacing: spacing ?? _spacing,
+      children: children ?? _children,
     );
   }
 }
@@ -141,14 +165,17 @@ extension RowExtension on Row {
 
   /// Wraps every child inside an [Expanded] widget.
   Row expandedAll() => _copyWith(
-        children: _children.map((child) => material.Expanded(child: child)).toList(),
+        children:
+            _children.map((child) => material.Expanded(child: child)).toList(),
       );
 
   /// Wraps every child in a [Flexible] widget with configurable [flex] and [fit].
-  Row flexibleAll({int flex = 1, material.FlexFit fit = material.FlexFit.loose}) =>
+  Row flexibleAll(
+          {int flex = 1, material.FlexFit fit = material.FlexFit.loose}) =>
       _copyWith(
         children: _children
-            .map((child) => material.Flexible(flex: flex, fit: fit, child: child))
+            .map((child) =>
+                material.Flexible(flex: flex, fit: fit, child: child))
             .toList(),
       );
 

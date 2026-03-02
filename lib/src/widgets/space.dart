@@ -1,7 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-
 //MARK: - Constants
 /// A set of predefined spacing values used throughout the UI for
 /// consistent padding, margin, and layout gaps.
@@ -87,7 +86,6 @@ extension SpacingValue on Spacing {
   }
 }
 
-
 //MARK: - Rendering
 class RenderSpace extends RenderBox {
   RenderSpace({
@@ -147,7 +145,8 @@ class RenderSpace extends RenderBox {
   Size computeDryLayout(BoxConstraints constraints) {
     final dir = _direction;
     if (dir == null) {
-      throw FlutterError('Space must be inside a Flex or provide fallbackDirection.');
+      throw FlutterError(
+          'Space must be inside a Flex or provide fallbackDirection.');
     }
 
     if (dir == Axis.horizontal) {
@@ -171,15 +170,13 @@ class RenderSpace extends RenderBox {
   }
 }
 
-
-
 class RenderSliverSpace extends RenderSliver {
   RenderSliverSpace({
     required double mainAxisExtent,
     Color? color,
     required double maxExtent,
-  }) : _mainAxisExtent = mainAxisExtent,
-       _color = color;
+  })  : _mainAxisExtent = mainAxisExtent,
+        _color = color;
 
   double get mainAxisExtent => _mainAxisExtent;
   double _mainAxisExtent;
@@ -220,8 +217,7 @@ class RenderSliverSpace extends RenderSliver {
       cacheExtent: cacheExtent,
       maxPaintExtent: mainAxisExtent,
       hitTestExtent: paintExtent,
-      hasVisualOverflow:
-          mainAxisExtent > constraints.remainingPaintExtent ||
+      hasVisualOverflow: mainAxisExtent > constraints.remainingPaintExtent ||
           constraints.scrollOffset > 0.0,
     );
   }
@@ -248,10 +244,7 @@ class RenderSliverSpace extends RenderSliver {
   }
 }
 
-
 //MARK: - Widgets
-
-
 
 /// A widget that creates space along the main axis of its parent layout.
 ///
@@ -274,31 +267,31 @@ class Space extends StatelessWidget {
 
   /// Creates a space with predefined enum-based spacing.
   const Space.size(Spacing size, {super.key, this.crossAxisExtent, this.color})
-    : extent = size;
+      : extent = size;
 
   const Space.tiny({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.tiny;
+      : extent = Spacing.tiny;
 
   const Space.extraSmall({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.extraSmall;
+      : extent = Spacing.extraSmall;
 
   const Space.small({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.small;
+      : extent = Spacing.small;
 
   const Space.medium({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.medium;
+      : extent = Spacing.medium;
 
   const Space.large({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.large;
+      : extent = Spacing.large;
 
   const Space.extraLarge({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.extraLarge;
+      : extent = Spacing.extraLarge;
 
   const Space.huge({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.huge;
+      : extent = Spacing.huge;
 
   const Space.massive({super.key, this.crossAxisExtent, this.color})
-    : extent = Spacing.massive;
+      : extent = Spacing.massive;
 
   /// The extent along the main axis.
   /// Can be either a [num] (int/double) or [Spacing] enum.
@@ -507,12 +500,12 @@ class SliverSpace extends LeafRenderObjectWidget {
 
   const SliverSpace.tiny({super.key, this.color}) : extent = Spacing.tiny;
   const SliverSpace.extraSmall({super.key, this.color})
-    : extent = Spacing.extraSmall;
+      : extent = Spacing.extraSmall;
   const SliverSpace.small({super.key, this.color}) : extent = Spacing.small;
   const SliverSpace.medium({super.key, this.color}) : extent = Spacing.medium;
   const SliverSpace.large({super.key, this.color}) : extent = Spacing.large;
   const SliverSpace.extraLarge({super.key, this.color})
-    : extent = Spacing.extraLarge;
+      : extent = Spacing.extraLarge;
   const SliverSpace.huge({super.key, this.color}) : extent = Spacing.huge;
   const SliverSpace.massive({super.key, this.color}) : extent = Spacing.massive;
   const SliverSpace.zero({super.key, this.color}) : extent = 0;
@@ -595,8 +588,8 @@ class SliverFlexibleSpace extends LeafRenderObjectWidget {
     this.minExtent = 0,
     this.maxExtent = double.infinity,
     this.color,
-  }) : assert(minExtent >= 0, 'minExtent must be non-negative'),
-       assert(maxExtent >= minExtent, 'maxExtent must be >= minExtent');
+  })  : assert(minExtent >= 0, 'minExtent must be non-negative'),
+        assert(maxExtent >= minExtent, 'maxExtent must be >= minExtent');
 
   final double minExtent;
   final double maxExtent;

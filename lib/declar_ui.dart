@@ -13,7 +13,13 @@ export 'package:flutter/material.dart'
         MaterialApp,
         Scaffold,
         CustomScrollView,
-        TextField;
+        TextField,
+        Wrap,
+        SafeArea,
+        Positioned,
+        Image,
+        Card,
+        ListView;
 
 export 'package:declar_ui/src/widgets/row.dart';
 export 'package:declar_ui/src/widgets/column.dart';
@@ -32,8 +38,17 @@ export 'package:declar_ui/src/utils/constants.dart';
 export 'package:declar_ui/src/widgets/custom_scroll_view.dart';
 export 'package:declar_ui/src/widgets/sliver.dart';
 export 'package:declar_ui/src/widgets/text_field.dart';
+export 'package:declar_ui/src/widgets/wrap.dart';
+export 'package:declar_ui/src/widgets/safe_area.dart';
+export 'package:declar_ui/src/widgets/positioned.dart';
+export 'package:declar_ui/src/widgets/image.dart';
+export 'package:declar_ui/src/widgets/card.dart';
+export 'package:declar_ui/src/widgets/list_view.dart';
 
 // Export extensions  port
 export 'package:declar_ui/src/extensions/widget+extension.dart';
 export 'package:declar_ui/src/extensions/string+extension.dart';
 export 'package:declar_ui/src/extensions/color+extension.dart';
+export 'package:declar_ui/src/extensions/context+extension.dart';
+export 'package:declar_ui/src/extensions/iterable+extension.dart';
+export 'package:declar_ui/src/extensions/num+extension.dart';

@@ -14,7 +14,7 @@ import 'package:flutter/material.dart' as material;
 ///
 /// Example:
 /// ```dart
-/// Stack([
+/// Stack.children([
 ///   Container().size(width: 100, height: 100).backgroundColor(Colors.red),
 ///   Text('Top Left').topLeft(),
 ///   Text('Bottom Right').bottomRight(),
@@ -30,7 +30,21 @@ class Stack extends material.StatelessWidget {
   final material.Clip _clipBehavior;
 
   /// Creates a customizable [Stack] widget.
-  const Stack(
+  const Stack({
+    super.key,
+    List<material.Widget> children = const [],
+    material.AlignmentGeometry alignment =
+        material.AlignmentDirectional.topStart,
+    material.TextDirection? textDirection,
+    material.StackFit fit = material.StackFit.loose,
+    material.Clip clipBehavior = material.Clip.hardEdge,
+  })  : _children = children,
+        _alignment = alignment,
+        _textDirection = textDirection,
+        _fit = fit,
+        _clipBehavior = clipBehavior;
+
+  const Stack.children(
     this._children, {
     super.key,
     material.AlignmentGeometry alignment =
@@ -52,12 +66,12 @@ class Stack extends material.StatelessWidget {
     material.Clip? clipBehavior,
   }) {
     return Stack(
-      children ?? _children,
       key: key,
       alignment: alignment ?? _alignment,
       textDirection: textDirection ?? _textDirection,
       fit: fit ?? _fit,
       clipBehavior: clipBehavior ?? _clipBehavior,
+      children: children ?? _children,
     );
   }
 

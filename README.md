@@ -1,7 +1,3 @@
-Here’s the **updated `README.md`** for **Declar UI**, including the new `Screen` and `Constants` utilities (`screen.dart` and `constants.dart`), while keeping the existing structure consistent and professional:
-
----
-
 # Declar UI
 
 **Declar UI** is a lightweight declarative UI framework for Flutter, developed by **UpDown Interactive**.
