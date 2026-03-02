@@ -59,29 +59,6 @@ extension DeclarativeContextExtension on BuildContext {
     return Navigator.of(this)
         .push<T>(MaterialPageRoute(builder: (context) => page));
   }
-
-  /// Pop the top widget from the navigation stack
-  void pop<T>([T? result]) {
-    Navigator.of(this).pop(result);
-  }
-
-  /// Push a new widget and execute a replacement
-  Future<T?> pushReplacement<T, TO>(Widget page, {TO? result}) {
-    return Navigator.of(this).pushReplacement<T, TO>(
-      MaterialPageRoute(builder: (context) => page),
-      result: result,
-    );
-  }
-
-  /// Push a new widget and remove all underlying pages
-  Future<T?> pushAndRemoveUntil<T>(
-      Widget page, bool Function(Route<dynamic>) predicate) {
-    return Navigator.of(this).pushAndRemoveUntil<T>(
-      MaterialPageRoute(builder: (context) => page),
-      predicate,
-    );
-  }
-
   // MARK: - Scaffold & Snackbars
 
   /// Shows a quick material [SnackBar].

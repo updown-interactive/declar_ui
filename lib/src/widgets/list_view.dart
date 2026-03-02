@@ -13,6 +13,7 @@ class ListView extends material.StatelessWidget {
   final bool _shrinkWrap;
   final material.EdgeInsetsGeometry? _padding;
   final material.ScrollPhysics? _physics;
+  final material.ScrollController? _controller;
 
   // Builder properties
   final material.NullableIndexedWidgetBuilder? _itemBuilder;
@@ -26,6 +27,7 @@ class ListView extends material.StatelessWidget {
     bool shrinkWrap = false,
     material.EdgeInsetsGeometry? padding,
     material.ScrollPhysics? physics,
+    material.ScrollController? controller,
     material.NullableIndexedWidgetBuilder? itemBuilder,
     int? itemCount,
   }) : _children = children,
@@ -34,6 +36,7 @@ class ListView extends material.StatelessWidget {
        _shrinkWrap = shrinkWrap,
        _padding = padding,
        _physics = physics,
+       _controller = controller,
        _itemBuilder = itemBuilder,
        _itemCount = itemCount;
 
@@ -45,11 +48,13 @@ class ListView extends material.StatelessWidget {
     bool shrinkWrap = false,
     material.EdgeInsetsGeometry? padding,
     material.ScrollPhysics? physics,
+    material.ScrollController? controller,
   }) : _scrollDirection = scrollDirection,
        _reverse = reverse,
        _shrinkWrap = shrinkWrap,
        _padding = padding,
        _physics = physics,
+       _controller = controller,
        _itemBuilder = null,
        _itemCount = null;
 
@@ -62,6 +67,7 @@ class ListView extends material.StatelessWidget {
     bool shrinkWrap = false,
     material.EdgeInsetsGeometry? padding,
     material.ScrollPhysics? physics,
+    material.ScrollController? controller,
   }) : _itemBuilder = itemBuilder,
        _itemCount = itemCount,
        _children = const [],
@@ -69,7 +75,8 @@ class ListView extends material.StatelessWidget {
        _reverse = reverse,
        _shrinkWrap = shrinkWrap,
        _padding = padding,
-       _physics = physics;
+       _physics = physics,
+       _controller = controller;
 
   ListView _copyWith({
     List<material.Widget>? children,
@@ -78,6 +85,8 @@ class ListView extends material.StatelessWidget {
     bool? shrinkWrap,
     material.EdgeInsetsGeometry? padding,
     material.ScrollPhysics? physics,
+    material.ScrollController? controller,
+    bool clearController = false,
     material.NullableIndexedWidgetBuilder? itemBuilder,
     int? itemCount,
   }) {
@@ -89,6 +98,7 @@ class ListView extends material.StatelessWidget {
       shrinkWrap: shrinkWrap ?? _shrinkWrap,
       padding: padding ?? _padding,
       physics: physics ?? _physics,
+      controller: clearController ? null : (controller ?? _controller),
       itemBuilder: itemBuilder ?? _itemBuilder,
       itemCount: itemCount ?? _itemCount,
     );
@@ -104,6 +114,7 @@ class ListView extends material.StatelessWidget {
         shrinkWrap: _shrinkWrap,
         padding: _padding,
         physics: _physics,
+        controller: _controller,
         itemBuilder: _itemBuilder,
         itemCount: _itemCount,
       );
@@ -116,6 +127,7 @@ class ListView extends material.StatelessWidget {
       shrinkWrap: _shrinkWrap,
       padding: _padding,
       physics: _physics,
+      controller: _controller,
       children: _children,
     );
   }
@@ -132,6 +144,10 @@ extension ListViewExtension on ListView {
   ListView reverse([bool reverse = true]) => _copyWith(reverse: reverse);
   ListView shrinkWrap([bool shrinkWrap = true]) =>
       _copyWith(shrinkWrap: shrinkWrap);
+
+  ListView controller(material.ScrollController controller) =>
+      _copyWith(controller: controller);
+  ListView noController() => _copyWith(clearController: true);
 
   ListView padding(material.EdgeInsetsGeometry padding) =>
       _copyWith(padding: padding);

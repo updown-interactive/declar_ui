@@ -1,3 +1,9 @@
+## **2.0.4**
+
+* Added `controller` support to the declarative `ListView` widget and builders.
+
+---
+
 ## **2.0.3**
 
 * Added `ListView.builder` directly to the `ListView` declarative wrapper for dynamic item streaming.
