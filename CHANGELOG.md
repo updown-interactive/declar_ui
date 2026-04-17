@@ -1,3 +1,20 @@
+## **2.0.6**
+
+* Upgraded SDK constraints for `flutter` to `>=3.41.7`.
+* Added missing standard Flutter constructors to `declar_ui` widget wrappers:
+  * `ListView`: Added `.separated` and `.custom` constructors.
+  * `Image`: Added `.file` and `.memory` constructors.
+  * `Text`: Added `.rich` for `TextSpan` support.
+  * `Sliver`: Added `Sliver.listSeparated` factory.
+
+---
+
+## **2.0.5**
+
+* Removed `Positioned` widget and exports.
+
+---
+
 ## **2.0.4**
 
 * Added `controller` support to the declarative `ListView` widget and builders.

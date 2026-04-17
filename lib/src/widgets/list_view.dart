@@ -17,6 +17,8 @@ class ListView extends material.StatelessWidget {
 
   // Builder properties
   final material.NullableIndexedWidgetBuilder? _itemBuilder;
+  final material.IndexedWidgetBuilder? _separatorBuilder;
+  final material.SliverChildDelegate? _childrenDelegate;
   final int? _itemCount;
 
   const ListView({
@@ -29,6 +31,8 @@ class ListView extends material.StatelessWidget {
     material.ScrollPhysics? physics,
     material.ScrollController? controller,
     material.NullableIndexedWidgetBuilder? itemBuilder,
+    material.IndexedWidgetBuilder? separatorBuilder,
+    material.SliverChildDelegate? childrenDelegate,
     int? itemCount,
   }) : _children = children,
        _scrollDirection = scrollDirection,
@@ -38,6 +42,8 @@ class ListView extends material.StatelessWidget {
        _physics = physics,
        _controller = controller,
        _itemBuilder = itemBuilder,
+       _separatorBuilder = separatorBuilder,
+       _childrenDelegate = childrenDelegate,
        _itemCount = itemCount;
 
   const ListView.children(
@@ -56,6 +62,8 @@ class ListView extends material.StatelessWidget {
        _physics = physics,
        _controller = controller,
        _itemBuilder = null,
+       _separatorBuilder = null,
+       _childrenDelegate = null,
        _itemCount = null;
 
   const ListView.builder({
@@ -69,7 +77,53 @@ class ListView extends material.StatelessWidget {
     material.ScrollPhysics? physics,
     material.ScrollController? controller,
   }) : _itemBuilder = itemBuilder,
+       _separatorBuilder = null,
+       _childrenDelegate = null,
        _itemCount = itemCount,
+       _children = const [],
+       _scrollDirection = scrollDirection,
+       _reverse = reverse,
+       _shrinkWrap = shrinkWrap,
+       _padding = padding,
+       _physics = physics,
+       _controller = controller;
+
+  const ListView.separated({
+    super.key,
+    required material.NullableIndexedWidgetBuilder itemBuilder,
+    required material.IndexedWidgetBuilder separatorBuilder,
+    required int itemCount,
+    material.Axis scrollDirection = material.Axis.vertical,
+    bool reverse = false,
+    bool shrinkWrap = false,
+    material.EdgeInsetsGeometry? padding,
+    material.ScrollPhysics? physics,
+    material.ScrollController? controller,
+  }) : _itemBuilder = itemBuilder,
+       _separatorBuilder = separatorBuilder,
+       _childrenDelegate = null,
+       _itemCount = itemCount,
+       _children = const [],
+       _scrollDirection = scrollDirection,
+       _reverse = reverse,
+       _shrinkWrap = shrinkWrap,
+       _padding = padding,
+       _physics = physics,
+       _controller = controller;
+
+  const ListView.custom({
+    super.key,
+    required material.SliverChildDelegate childrenDelegate,
+    material.Axis scrollDirection = material.Axis.vertical,
+    bool reverse = false,
+    bool shrinkWrap = false,
+    material.EdgeInsetsGeometry? padding,
+    material.ScrollPhysics? physics,
+    material.ScrollController? controller,
+  }) : _itemBuilder = null,
+       _separatorBuilder = null,
+       _childrenDelegate = childrenDelegate,
+       _itemCount = null,
        _children = const [],
        _scrollDirection = scrollDirection,
        _reverse = reverse,
@@ -88,6 +142,8 @@ class ListView extends material.StatelessWidget {
     material.ScrollController? controller,
     bool clearController = false,
     material.NullableIndexedWidgetBuilder? itemBuilder,
+    material.IndexedWidgetBuilder? separatorBuilder,
+    material.SliverChildDelegate? childrenDelegate,
     int? itemCount,
   }) {
     return ListView(
@@ -100,12 +156,42 @@ class ListView extends material.StatelessWidget {
       physics: physics ?? _physics,
       controller: clearController ? null : (controller ?? _controller),
       itemBuilder: itemBuilder ?? _itemBuilder,
+      separatorBuilder: separatorBuilder ?? _separatorBuilder,
+      childrenDelegate: childrenDelegate ?? _childrenDelegate,
       itemCount: itemCount ?? _itemCount,
     );
   }
 
   @override
   material.Widget build(material.BuildContext context) {
+    if (_separatorBuilder != null && _itemBuilder != null && _itemCount != null) {
+      return material.ListView.separated(
+        key: key,
+        scrollDirection: _scrollDirection,
+        reverse: _reverse,
+        shrinkWrap: _shrinkWrap,
+        padding: _padding,
+        physics: _physics,
+        controller: _controller,
+        itemBuilder: _itemBuilder!,
+        separatorBuilder: _separatorBuilder!,
+        itemCount: _itemCount!,
+      );
+    }
+
+    if (_childrenDelegate != null) {
+      return material.ListView.custom(
+        key: key,
+        scrollDirection: _scrollDirection,
+        reverse: _reverse,
+        shrinkWrap: _shrinkWrap,
+        padding: _padding,
+        physics: _physics,
+        controller: _controller,
+        childrenDelegate: _childrenDelegate!,
+      );
+    }
+
     if (_itemBuilder != null) {
       return material.ListView.builder(
         key: key,

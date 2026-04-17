@@ -2,6 +2,9 @@
 //  image.dart
 // ------------------------------------------------------------ //
 
+import 'dart:io' as io;
+import 'dart:typed_data' as typed_data;
+
 import 'package:flutter/material.dart' as material;
 
 /// A declarative wrapper around Flutter’s [Image] widget that supports
@@ -65,6 +68,44 @@ class Image extends material.StatelessWidget {
     material.Color? color,
     material.BlendMode? colorBlendMode,
   })  : _image = material.AssetImage(name),
+        _width = width,
+        _height = height,
+        _fit = fit,
+        _alignment = alignment,
+        _repeat = repeat,
+        _color = color,
+        _colorBlendMode = colorBlendMode;
+
+  Image.file(
+    io.File file, {
+    super.key,
+    double? width,
+    double? height,
+    material.BoxFit? fit,
+    material.AlignmentGeometry alignment = material.Alignment.center,
+    material.ImageRepeat repeat = material.ImageRepeat.noRepeat,
+    material.Color? color,
+    material.BlendMode? colorBlendMode,
+  })  : _image = material.FileImage(file),
+        _width = width,
+        _height = height,
+        _fit = fit,
+        _alignment = alignment,
+        _repeat = repeat,
+        _color = color,
+        _colorBlendMode = colorBlendMode;
+
+  Image.memory(
+    typed_data.Uint8List bytes, {
+    super.key,
+    double? width,
+    double? height,
+    material.BoxFit? fit,
+    material.AlignmentGeometry alignment = material.Alignment.center,
+    material.ImageRepeat repeat = material.ImageRepeat.noRepeat,
+    material.Color? color,
+    material.BlendMode? colorBlendMode,
+  })  : _image = material.MemoryImage(bytes),
         _width = width,
         _height = height,
         _fit = fit,

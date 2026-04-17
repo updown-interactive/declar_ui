@@ -10,6 +10,7 @@ import 'package:flutter/material.dart' as material;
 enum SliverType {
   list,
   listBuilder,
+  listSeparated,
   grid,
   fixedExtentList,
   prototypedExtentList,
@@ -27,6 +28,7 @@ enum SliverType {
 /// Supports multiple sliver types:
 /// - [SliverType.list] → SliverList (Explicit child list)
 /// - [SliverType.listBuilder] → SliverList.builder (Dynamic child list)
+/// - [SliverType.listSeparated] → SliverList.separated (List with separators)
 /// - [SliverType.grid] → SliverGrid
 /// - [SliverType.fixedExtentList] → SliverFixedExtentList
 /// - [SliverType.prototypedExtentList] → SliverPrototypeExtentList
@@ -75,6 +77,7 @@ class Sliver extends material.StatelessWidget {
 
   // Builder properties (for list/grid builder)
   final material.NullableIndexedWidgetBuilder? _itemBuilder;
+  final material.IndexedWidgetBuilder? _separatorBuilder;
   final int? _itemCount;
 
   // Single child (for toBoxAdapter)
@@ -102,6 +105,7 @@ class Sliver extends material.StatelessWidget {
     material.EdgeInsetsGeometry? padding,
     material.Widget? child,
     material.NullableIndexedWidgetBuilder? itemBuilder,
+    material.IndexedWidgetBuilder? separatorBuilder,
     int? itemCount,
   }) : _children = children,
        _type = type,
@@ -122,6 +126,7 @@ class Sliver extends material.StatelessWidget {
        _padding = padding,
        _child = child,
        _itemBuilder = itemBuilder,
+       _separatorBuilder = separatorBuilder,
        _itemCount = itemCount;
 
   // MARK: - Factory Constructors
@@ -176,6 +181,37 @@ class Sliver extends material.StatelessWidget {
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,
       itemBuilder: itemBuilder,
+      itemCount: itemCount,
+    );
+  }
+
+  /// Creates a dynamically built [SliverList] that includes separators between items.
+  ///
+  /// ### Example
+  /// ```dart
+  /// Sliver.listSeparated(
+  ///   itemBuilder: (context, index) => Text('Item $index'),
+  ///   separatorBuilder: (context, index) => const Divider(),
+  ///   itemCount: 100,
+  /// );
+  /// ```
+  factory Sliver.listSeparated({
+    material.Key? key,
+    required material.NullableIndexedWidgetBuilder itemBuilder,
+    required material.IndexedWidgetBuilder separatorBuilder,
+    required int itemCount,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+  }) {
+    return Sliver._(
+      key: key,
+      type: SliverType.listSeparated,
+      addAutomaticKeepAlives: addAutomaticKeepAlives,
+      addRepaintBoundaries: addRepaintBoundaries,
+      addSemanticIndexes: addSemanticIndexes,
+      itemBuilder: itemBuilder,
+      separatorBuilder: separatorBuilder,
       itemCount: itemCount,
     );
   }
@@ -372,6 +408,7 @@ class Sliver extends material.StatelessWidget {
     material.EdgeInsetsGeometry? padding,
     material.Widget? child,
     material.NullableIndexedWidgetBuilder? itemBuilder,
+    material.IndexedWidgetBuilder? separatorBuilder,
     int? itemCount,
     bool clearPadding = false,
   }) {
@@ -396,6 +433,7 @@ class Sliver extends material.StatelessWidget {
       child: child ?? _child,
       children: children ?? _children,
       itemBuilder: itemBuilder ?? _itemBuilder,
+      separatorBuilder: separatorBuilder ?? _separatorBuilder,
       itemCount: itemCount ?? _itemCount,
     );
   }
@@ -423,6 +461,16 @@ class Sliver extends material.StatelessWidget {
             addRepaintBoundaries: _addRepaintBoundaries,
             addSemanticIndexes: _addSemanticIndexes,
           ),
+        );
+
+      case SliverType.listSeparated:
+        return material.SliverList.separated(
+          itemBuilder: _itemBuilder ?? (context, index) => const material.SizedBox.shrink(),
+          separatorBuilder: _separatorBuilder ?? (context, index) => const material.SizedBox.shrink(),
+          itemCount: _itemCount,
+          addAutomaticKeepAlives: _addAutomaticKeepAlives,
+          addRepaintBoundaries: _addRepaintBoundaries,
+          addSemanticIndexes: _addSemanticIndexes,
         );
 
       case SliverType.grid:

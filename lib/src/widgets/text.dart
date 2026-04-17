@@ -18,7 +18,8 @@ import 'package:flutter/material.dart' as material;
 ///   .align(material.TextAlign.center);
 /// ```
 class Text extends material.StatelessWidget {
-  final String data;
+  final String? data;
+  final material.InlineSpan? textSpan;
   final material.TextStyle? _style;
   final material.TextAlign? _textAlign;
   final material.TextDirection? _textDirection;
@@ -30,7 +31,7 @@ class Text extends material.StatelessWidget {
 
   /// Creates a declarative [Text] widget.
   const Text(
-    this.data, {
+    String this.data, {
     super.key,
     material.TextStyle? style,
     material.TextAlign? textAlign,
@@ -41,6 +42,29 @@ class Text extends material.StatelessWidget {
     int? maxLines,
     String? semanticsLabel,
   })  : _style = style,
+        _textAlign = textAlign,
+        _textDirection = textDirection,
+        _softWrap = softWrap,
+        _overflow = overflow,
+        _textScaleFactor = textScaleFactor,
+        _maxLines = maxLines,
+        _semanticsLabel = semanticsLabel,
+        textSpan = null;
+
+  /// Creates a declarative [Text] widget with an [InlineSpan].
+  const Text.rich(
+    material.InlineSpan this.textSpan, {
+    super.key,
+    material.TextStyle? style,
+    material.TextAlign? textAlign,
+    material.TextDirection? textDirection,
+    bool? softWrap,
+    material.TextOverflow? overflow,
+    material.TextScaler? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+  })  : data = null,
+        _style = style,
         _textAlign = textAlign,
         _textDirection = textDirection,
         _softWrap = softWrap,
@@ -60,8 +84,22 @@ class Text extends material.StatelessWidget {
     int? maxLines,
     String? semanticsLabel,
   }) {
+    if (textSpan != null) {
+      return Text.rich(
+        textSpan!,
+        key: key,
+        style: style ?? _style,
+        textAlign: textAlign ?? _textAlign,
+        textDirection: textDirection ?? _textDirection,
+        softWrap: softWrap ?? _softWrap,
+        overflow: overflow ?? _overflow,
+        textScaleFactor: textScaleFactor ?? _textScaleFactor,
+        maxLines: maxLines ?? _maxLines,
+        semanticsLabel: semanticsLabel ?? _semanticsLabel,
+      );
+    }
     return Text(
-      data,
+      data!,
       key: key,
       style: style ?? _style,
       textAlign: textAlign ?? _textAlign,
@@ -76,8 +114,23 @@ class Text extends material.StatelessWidget {
 
   @override
   material.Widget build(material.BuildContext context) {
+    if (textSpan != null) {
+      return material.Text.rich(
+        textSpan!,
+        key: key,
+        style: _style,
+        textAlign: _textAlign,
+        textDirection: _textDirection,
+        softWrap: _softWrap,
+        overflow: _overflow,
+        textScaler: _textScaleFactor,
+        maxLines: _maxLines,
+        semanticsLabel: _semanticsLabel,
+      );
+    }
+
     return material.Text(
-      data,
+      data!,
       key: key,
       style: _style,
       textAlign: _textAlign,
